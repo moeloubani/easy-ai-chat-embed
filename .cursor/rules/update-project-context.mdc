@@ -1,0 +1,34 @@
+---
+description: 
+globs: wp-content/plugins/easy-ai-chat-embed/*
+alwaysApply: false
+---
+--- 
+description: Reminder to update project context files
+globs:
+  - '**/easy-ai-chat-embed/**' # Apply broadly within the plugin directory
+---
+# Update Project Context Files Rule
+
+<rule>
+name: update_project_context_files
+description: Reminds the AI assistant to update TODO.md and CONTEXT.md after making progress on the easy-ai-chat-embed plugin.
+
+filters:
+  # Trigger on any user message when files within the plugin are potentially relevant
+  - type: file_path
+    pattern: "wp-content/plugins/easy-ai-chat-embed/.*"
+  - type: event
+    pattern: "user_message"
+
+actions:
+  - type: suggest # Use suggest to remind without blocking
+    message: |
+      **Reminder:** After processing this request and making changes related to the 'easy-ai-chat-embed' plugin, remember to:
+      1. Update `easy-ai-chat-embed/TODO.md` to reflect completed tasks and newly identified steps.
+      2. Update `easy-ai-chat-embed/CONTEXT.md` with the latest state of key files and overall progress.
+
+metadata:
+  priority: medium
+  version: 1.0
+</rule>

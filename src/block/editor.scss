@@ -1,0 +1,12 @@
+/**
+ * The following styles get applied only in the editor.
+ */
+
+// Add editor-specific styles here if needed.
+.wp-block-easy-ai-chat-embed-chat-embed {
+	// Example: slightly different border in editor
+	border: 1px dashed #aaa;
+    padding: 15px;
+    background-color: #f8f9fa;
+    text-align: center;
+} 

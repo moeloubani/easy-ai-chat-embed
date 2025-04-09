@@ -1,0 +1,158 @@
+/**
+ * Frontend-only styles for the chat embed.
+ */
+
+.wp-block-easy-ai-chat-embed-chat-embed {
+	/* Override react-chatbot-kit styles here if needed */
+
+	/* Ensure container takes up space */
+	min-height: 300px; // Adjust as needed
+	min-width: 250px;  // Adjust as needed
+	position: relative; // Often needed for positioning chat components
+}
+
+.easy-ai-chat-widget-container {
+	/* Styles for the direct container rendered by React */
+	height: 100%;
+	width: 100%;
+}
+
+/* Import default react-chatbot-kit styles */
+/* This is already imported in frontend.js, but keeping it here */
+/* might be useful for reference or if you adjust the JS import. */
+/* @import '~react-chatbot-kit/build/main.css'; */
+
+/**
+ * Frontend Styles for Easy AI Chat Embed
+ */
+
+// Import default chatbot styles (relative path might need adjustment based on build tool)
+// Assuming the build process handles node_modules resolution or copies files
+// @import '~react-chatbot-kit/build/main.css'; // This often doesn't work directly, included via JS instead
+
+// Container for the whole widget
+.easy-ai-chat-widget-container {
+    // Add any specific container styling if needed
+    // Example: max-width, margin
+}
+
+// Override react-chatbot-kit styles
+// Use browser developer tools to inspect element classes from react-chatbot-kit
+.react-chatbot-kit-chat-container {
+    // Example: Adjust overall container appearance
+    // border: 1px solid #ddd;
+    // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.react-chatbot-kit-chat-header {
+    // Example: Style the header
+    // background-color: #f1f1f1;
+    // border-bottom: 1px solid #ddd;
+    // font-weight: bold;
+    padding: 10px 15px; // Add some padding
+}
+
+.react-chatbot-kit-chat-message-container {
+    padding: 15px; // Add padding around messages
+}
+
+.react-chatbot-kit-user-chat-message,
+.react-chatbot-kit-bot-chat-message {
+    // Example: Common message bubble styles
+    // padding: 8px 12px;
+    // border-radius: 15px;
+    // margin-bottom: 8px;
+}
+
+.react-chatbot-kit-user-chat-message {
+    // Example: Style user message bubble
+    // background-color: #0073aa; // WordPress blue
+    // color: #fff;
+    // margin-left: auto; // Align to right
+}
+
+.react-chatbot-kit-bot-chat-message {
+    // Example: Style bot message bubble
+    // background-color: #e9e9e9;
+    // color: #333;
+}
+
+.react-chatbot-kit-chat-input-form {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+.react-chatbot-kit-chat-input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 8px;
+}
+
+.react-chatbot-kit-chat-btn-send {
+    padding: 8px 15px;
+    border: none;
+    background-color: #0073aa; // WordPress blue
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+        background-color: #005a87;
+    }
+}
+
+// Add styles for our specific [Error] prefix if desired
+.react-chatbot-kit-bot-message-container span:has(> .react-chatbot-kit-bot-chat-message) {
+    // Target the span containing the bot message
+    & > span > .react-chatbot-kit-bot-chat-message:contains('[Error]') {
+        // This :contains selector might not work reliably across browsers/versions
+        // A more robust way would be to add a class via custom components
+        // background-color: #fdd; // Light red background for errors
+        // border: 1px solid #f00;
+    }
+} 
+
+// Ensure the main container and the react-chatbot-kit container take full width
+.easy-ai-chat-embed-instance,
+.react-chatbot-kit-chat-container {
+	width: 100% !important; // Use !important to override potential inline styles
+	max-width: 100%;
+}
+
+.react-chatbot-kit-chat-bot-message {
+    width: auto !important;
+}
+
+// Optionally, adjust the header styles if needed
+.react-chatbot-kit-chat-header {
+	// Example: Add padding, change background, etc.
+	padding: 10px 15px; // Adjust padding as needed
+	// background-color: #f0f0f0; // Example background
+	// border-bottom: 1px solid #ccc; // Example border
+}
+
+// Style for the outer wrapper added in frontend.js
+.easy-ai-chat-widget-container {
+    width: 100%; // Make the immediate wrapper full width too
+} 
+
+.easy-ai-chat-widget-container {
+    .react-chatbot-kit-chat-bot-message {
+        margin-left: 0;
+    }
+
+    .react-chatbot-kit-chat-bot-avatar {
+        margin-left: auto;
+    }
+}
+
+.easy-ai-chat-embed-instance {
+    border: 1px dashed #aaa;
+    padding: 15px;
+    background-color: #f8f9fa;
+    text-align: center;
+}

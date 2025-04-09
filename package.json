@@ -1,0 +1,37 @@
+{
+  "name": "easy-ai-chat-embed",
+  "version": "1.0.0",
+  "description": "JS dependencies for Easy AI Chat Embed plugin.",
+  "main": "build/index.js",
+  "scripts": {
+    "clean": "rm -rf build",
+    "build": "npm run clean && npm run build:all",
+    "build:all": "wp-scripts build src/index.js --output-path=build",
+    "start": "wp-scripts start src/index.js --output-path=build",
+    "cleanup:old": "rm -rf blocks",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style src/**/*.scss",
+    "lint:js": "wp-scripts lint-js src/**/*.js",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip"
+  },
+  "keywords": [
+    "wordpress",
+    "gutenberg",
+    "block",
+    "chat",
+    "ai"
+  ],
+  "author": "Your Name or Company",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@babel/preset-env": "^7.23.3",
+    "@babel/preset-react": "^7.23.3",
+    "@wordpress/scripts": "^30.14.1",
+    "babel-loader": "^9.1.3",
+    "copy-webpack-plugin": "^11.0.0"
+  },
+  "dependencies": {
+    "react-chatbot-kit": "^2.2.2"
+  }
+}

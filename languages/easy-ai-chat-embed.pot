@@ -1,0 +1,326 @@
+# Copyright (C) 2025 Your Name or Company
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy AI Chat Embed 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/easy-ai-chat-embed\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-08T21:35:50+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: easy-ai-chat-embed\n"
+
+#. Plugin Name of the plugin
+msgid "Easy AI Chat Embed"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "#"
+msgstr ""
+
+#. Description of the plugin
+msgid "Embeds a chat interface powered by various AI models (ChatGPT, Claude, Gemini) via shortcode, block, or Elementor widget."
+msgstr ""
+
+#. Author of the plugin
+msgid "Your Name or Company"
+msgstr ""
+
+#: admin/settings.php:35
+msgid "API Key Settings"
+msgstr ""
+
+#: admin/settings.php:43
+msgid "OpenAI API Key"
+msgstr ""
+
+#: admin/settings.php:51
+msgid "Anthropic API Key"
+msgstr ""
+
+#: admin/settings.php:59
+msgid "Google AI API Key"
+msgstr ""
+
+#: admin/settings.php:69
+msgid "Default Chat Settings"
+msgstr ""
+
+#: admin/settings.php:77
+msgid "Default AI Model"
+msgstr ""
+
+#: admin/settings.php:87
+msgid "Default Initial Prompt"
+msgstr ""
+
+#: admin/settings.php:126
+msgid "Enter the API keys for the AI services you want to enable."
+msgstr ""
+
+#: admin/settings.php:133
+msgid "Set the default model and initial prompt for new chat instances (can be overridden per instance)."
+msgstr ""
+
+#: admin/settings.php:150
+msgid "Leave blank if not using this service."
+msgstr ""
+
+#: admin/settings.php:179
+msgid "Optional text prepended to every user prompt to guide the AI by default."
+msgstr ""
+
+#: admin/settings.php:196
+msgid "Save Settings"
+msgstr ""
+
+#: easy-ai-chat-embed.php:213
+msgid "Easy AI Chat Embed Settings"
+msgstr ""
+
+#: easy-ai-chat-embed.php:214
+#: includes/elementor/widget.php:31
+msgid "AI Chat Embed"
+msgstr ""
+
+#: includes/api/handler.php:20
+msgid "Nonce verification failed! Please refresh and try again."
+msgstr ""
+
+#: includes/api/handler.php:25
+msgid "You do not have permission to use the AI chat."
+msgstr ""
+
+#: includes/api/handler.php:44
+msgid "Missing required data (message, model, or instance ID)."
+msgstr ""
+
+#. translators: %s: The name of the selected AI model.
+#: includes/api/handler.php:61
+msgid "API key for the selected model (%s) is missing or not configured in settings."
+msgstr ""
+
+#. translators: %s: The name of the selected AI model.
+#: includes/api/handler.php:80
+msgid "Unsupported AI model selected: %s"
+msgstr ""
+
+#: includes/api/handler.php:90
+msgid "AI service returned an empty response."
+msgstr ""
+
+#: includes/api/handler.php:102
+msgid "Error contacting AI service:"
+msgstr ""
+
+#: includes/api/handler.php:149
+msgid "Failed to encode request data for OpenAI."
+msgstr ""
+
+#: includes/api/handler.php:165
+msgid "Failed to connect to OpenAI API:"
+msgstr ""
+
+#: includes/api/handler.php:173
+#: includes/api/handler.php:255
+#: includes/api/handler.php:340
+msgid "Unknown error occurred."
+msgstr ""
+
+#. translators: 1: HTTP response code (e.g., 400), 2: Error message from API.
+#: includes/api/handler.php:177
+msgid "OpenAI API Error (%1$d): %2$s"
+msgstr ""
+
+#: includes/api/handler.php:183
+msgid "Failed to decode OpenAI response."
+msgstr ""
+
+#: includes/api/handler.php:189
+msgid "Received an empty response from OpenAI."
+msgstr ""
+
+#: includes/api/handler.php:229
+msgid "Failed to encode request data for Anthropic."
+msgstr ""
+
+#: includes/api/handler.php:246
+msgid "Failed to connect to Anthropic API:"
+msgstr ""
+
+#. translators: 1: HTTP response code (e.g., 400), 2: Error type string (e.g., 'invalid_request_error'), 3: Error message from API.
+#: includes/api/handler.php:259
+msgid "Anthropic API Error (%1$d - %2$s): %3$s"
+msgstr ""
+
+#: includes/api/handler.php:265
+msgid "Failed to decode Anthropic response."
+msgstr ""
+
+#: includes/api/handler.php:272
+msgid "Received an empty or unexpected response from Anthropic."
+msgstr ""
+
+#: includes/api/handler.php:317
+msgid "Failed to encode request data for Google AI."
+msgstr ""
+
+#: includes/api/handler.php:332
+msgid "Failed to connect to Google AI API:"
+msgstr ""
+
+#. translators: 1: HTTP response code (e.g., 400), 2: Error message from API.
+#: includes/api/handler.php:344
+msgid "Google AI API Error (%1$d): %2$s"
+msgstr ""
+
+#: includes/api/handler.php:350
+msgid "Failed to decode Google AI response."
+msgstr ""
+
+#: includes/api/handler.php:360
+msgid "Google AI response generation stopped due to: %s"
+msgstr ""
+
+#: includes/api/handler.php:364
+msgid "Received an empty or unexpected response from Google AI."
+msgstr ""
+
+#: includes/elementor/widget.php:63
+msgid "Chat Settings"
+msgstr ""
+
+#: includes/elementor/widget.php:71
+msgid "Use Default Model"
+msgstr ""
+
+#: includes/elementor/widget.php:81
+#: blocks/chat-embed/edit.js:53
+#: build/index.js:1
+msgid "Select AI Model"
+msgstr ""
+
+#: includes/elementor/widget.php:85
+msgid "Overrides the default model set in global settings."
+msgstr ""
+
+#: includes/elementor/widget.php:92
+#: blocks/chat-embed/edit.js:61
+#: build/index.js:1
+msgid "Initial System Prompt"
+msgstr ""
+
+#: includes/elementor/widget.php:96
+msgid "Enter optional initial prompt..."
+msgstr ""
+
+#: includes/elementor/widget.php:97
+msgid "Overrides the default initial prompt set in global settings."
+msgstr ""
+
+#: blocks/chat-embed/edit.js:16
+#: build/index.js:1
+msgid "Select a Model"
+msgstr ""
+
+#: blocks/chat-embed/edit.js:51
+#: build/index.js:1
+msgid "AI Model Settings"
+msgstr ""
+
+#: blocks/chat-embed/edit.js:62
+#: build/index.js:1
+msgid "Optional text prepended to every user prompt to guide the AI."
+msgstr ""
+
+#: blocks/chat-embed/edit.js:71
+#: build/index.js:1
+msgid "AI Chat Embed Placeholder - Configure in sidebar."
+msgstr ""
+
+#: blocks/chat-embed/save.js:38
+#: build/index.js:1
+msgid "Please enable JavaScript to use the AI Chat."
+msgstr ""
+
+#: build/frontend.js:1
+msgid "AI Assistant"
+msgstr ""
+
+#: build/frontend.js:1
+msgid "Hi! I'm here to help. Ask me anything."
+msgstr ""
+
+#: build/frontend.js:1
+msgid "Hi, friend."
+msgstr ""
+
+#: build/frontend.js:1
+msgid "Thinking... (Backend connection not yet implemented)"
+msgstr ""
+
+#: src/chatbot/ActionProvider.js:16
+msgid "Hello, friend."
+msgstr ""
+
+#: src/chatbot/ActionProvider.js:31
+msgid "[Error] Sorry, there was a configuration error. Cannot connect to the server."
+msgstr ""
+
+#: src/chatbot/ActionProvider.js:39
+msgid "Thinking..."
+msgstr ""
+
+#. translators: %s: Error message received from the backend or API.
+#: src/chatbot/ActionProvider.js:85
+msgid "[Error] %s"
+msgstr ""
+
+#: src/chatbot/ActionProvider.js:94
+msgid "[Error] Sorry, something went wrong while contacting the AI. Please try again later."
+msgstr ""
+
+#: blocks/chat-embed/block.json
+msgctxt "block title"
+msgid "AI Chat Embed"
+msgstr ""
+
+#: blocks/chat-embed/block.json
+msgctxt "block description"
+msgid "Embeds an AI-powered chat interface (ChatGPT, Claude, Gemini)."
+msgstr ""
+
+#: blocks/chat-embed/block.json
+msgctxt "block keyword"
+msgid "chat"
+msgstr ""
+
+#: blocks/chat-embed/block.json
+msgctxt "block keyword"
+msgid "ai"
+msgstr ""
+
+#: blocks/chat-embed/block.json
+msgctxt "block keyword"
+msgid "chatbot"
+msgstr ""
+
+#: blocks/chat-embed/block.json
+msgctxt "block keyword"
+msgid "gpt"
+msgstr ""
+
+#: blocks/chat-embed/block.json
+msgctxt "block keyword"
+msgid "claude"
+msgstr ""
+
+#: blocks/chat-embed/block.json
+msgctxt "block keyword"
+msgid "gemini"
+msgstr ""
