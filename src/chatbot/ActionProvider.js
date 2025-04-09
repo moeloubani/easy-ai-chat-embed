@@ -16,7 +16,7 @@ class ActionProvider {
 	}
 
 	// Handle user messages and API calls
-	handleUserMessage = async (userMessage) => {
+	handleUserMessage = async (userMessage, currentState) => {
 		// Get instance data from global object
 		const instances = window.easyAiChatInstances || {};
 		const instanceKeys = Object.keys(instances);
@@ -38,6 +38,17 @@ class ActionProvider {
 		const loadingMessage = this.createChatBotMessage('Thinking...');
 		this.addMessageToState(loadingMessage);
 		
+		// Format conversation history directly here
+		let conversationHistory = [];
+		if (currentState && Array.isArray(currentState.messages)) {
+			conversationHistory = currentState.messages.map(message => ({
+				type: message.type, // 'bot' or 'user'
+				message: message.message
+			}));
+		} else {
+			console.warn('ActionProvider: currentState or currentState.messages not available for history.');
+		}
+
 		// Prepare AJAX request
 		const requestData = {
 			action: 'easy_ai_chat_embed_send_message',
@@ -46,9 +57,8 @@ class ActionProvider {
 			instanceId: instanceId,
 			selectedModel: selectedModel,
 			initialPrompt: initialPrompt,
-			// We're not passing conversation history here for simplicity
-			// This can be added back if needed
-			conversationHistory: '[]'
+			// Use the directly formatted history
+			conversationHistory: JSON.stringify(conversationHistory) // Send empty array if state was undefined
 		};
 		
 		try {

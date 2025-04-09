@@ -100,10 +100,6 @@ domReady( () => {
 			// Pass chatbotName instead of botName directly if config expects it
 			const botConfig = configFn(instanceId, initialPrompt, selectedModel, chatbotName, ajaxUrl, nonce, initialState, isBlock, isShortcode, isElementor);
 
-			// Log the ActionProvider before passing it
-			console.log('Typeof ActionProvider:', typeof ActionProvider);
-			console.log('ActionProvider value:', ActionProvider);
-
 			// Setup chatbot props - pass CLASSES/constructors directly, not instances or factory functions
 			const chatbotProps = {
 				config: botConfig,

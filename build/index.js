@@ -15,9 +15,12 @@
 /*!*******************************************************!*\
   !*** ./node_modules/react-chatbot-kit/build/main.css ***!
   \*******************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleNotFoundError: Module not found: Error: Can't resolve '/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/css-loader/dist/cjs.js' in '/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/react-chatbot-kit/build'\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/webpack/lib/Compilation.js:2230:28\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/webpack/lib/NormalModuleFactory.js:928:13\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:10:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/webpack/lib/NormalModuleFactory.js:338:22\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/webpack/lib/NormalModuleFactory.js:520:22\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/webpack/lib/NormalModuleFactory.js:155:10\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/webpack/lib/NormalModuleFactory.js:750:23\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/neo-async/async.js:2830:7\n    at done (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/neo-async/async.js:2925:13)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/webpack/lib/NormalModuleFactory.js:1197:23\n    at finishWithoutResolve (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:567:11)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:656:15\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:718:5\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:718:5\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:89:43\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:718:5\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:718:5\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:718:5\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:718:5\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:89:43\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:718:5\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:16:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/Resolver.js:718:5\n    at eval (eval at create (/Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at /Users/moe/Sites/cursor-ai-wp/wp-content/plugins/easy-ai-chat-embed/node_modules/enhanced-resolve/lib/DirectoryExistsPlugin.js:41:15\n    at process.processTicksAndRejections (node:internal/process/task_queues:89:21)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -61,7 +64,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './editor.scss'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/block/editor.scss");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
 /**
@@ -165,6 +168,19 @@ function Edit({
 
 /***/ }),
 
+/***/ "./src/block/editor.scss":
+/*!*******************************!*\
+  !*** ./src/block/editor.scss ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/block/index.js":
 /*!****************************!*\
   !*** ./src/block/index.js ***!
@@ -178,8 +194,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/block/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./save */ "./src/block/save.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./src/block/block.json");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './style.scss'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './editor.scss'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/block/style.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/block/editor.scss");
 /**
  * WordPress dependencies
  */
@@ -274,6 +290,19 @@ function save({
 
 /***/ }),
 
+/***/ "./src/block/style.scss":
+/*!******************************!*\
+  !*** ./src/block/style.scss ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/chatbot/ActionProvider.js":
 /*!***************************************!*\
   !*** ./src/chatbot/ActionProvider.js ***!
@@ -306,7 +335,7 @@ class ActionProvider {
   }
 
   // Handle user messages and API calls
-  handleUserMessage = async userMessage => {
+  handleUserMessage = async (userMessage, currentState) => {
     // Get instance data from global object
     const instances = window.easyAiChatInstances || {};
     const instanceKeys = Object.keys(instances);
@@ -331,6 +360,18 @@ class ActionProvider {
     const loadingMessage = this.createChatBotMessage('Thinking...');
     this.addMessageToState(loadingMessage);
 
+    // Format conversation history directly here
+    let conversationHistory = [];
+    if (currentState && Array.isArray(currentState.messages)) {
+      conversationHistory = currentState.messages.map(message => ({
+        type: message.type,
+        // 'bot' or 'user'
+        message: message.message
+      }));
+    } else {
+      console.warn('ActionProvider: currentState or currentState.messages not available for history.');
+    }
+
     // Prepare AJAX request
     const requestData = {
       action: 'easy_ai_chat_embed_send_message',
@@ -339,9 +380,8 @@ class ActionProvider {
       instanceId: instanceId,
       selectedModel: selectedModel,
       initialPrompt: initialPrompt,
-      // We're not passing conversation history here for simplicity
-      // This can be added back if needed
-      conversationHistory: '[]'
+      // Use the directly formatted history
+      conversationHistory: JSON.stringify(conversationHistory) // Send empty array if state was undefined
     };
     try {
       const response = await fetch(ajaxUrl, {
@@ -412,6 +452,7 @@ class MessageParser {
   constructor(actionProvider, state) {
     this.actionProvider = actionProvider;
     this.state = state;
+    console.log('MessageParser constructor state:', state); // Add log here
   }
   parse(message) {
     // console.log( 'User message:', message ); // Log user input
@@ -419,7 +460,9 @@ class MessageParser {
 
     // Simple implementation: pass every non-empty message to the action provider
     if (message.trim() !== '') {
-      this.actionProvider.handleUserMessage(message);
+      console.log('MessageParser parse state:', this.state); // Add log here
+      // Pass the current state along to the action provider
+      this.actionProvider.handleUserMessage(message, this.state);
     }
   }
 }
@@ -524,7 +567,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chatbot_config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chatbot/config */ "./src/chatbot/config.js");
 /* harmony import */ var _chatbot_MessageParser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chatbot/MessageParser */ "./src/chatbot/MessageParser.js");
 /* harmony import */ var _chatbot_ActionProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chatbot/ActionProvider */ "./src/chatbot/ActionProvider.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './frontend.scss'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _frontend_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./frontend.scss */ "./src/frontend.scss");
 /**
  * WordPress dependencies
  */
@@ -631,10 +674,6 @@ domReady(() => {
       // Pass chatbotName instead of botName directly if config expects it
       const botConfig = (0,_chatbot_config__WEBPACK_IMPORTED_MODULE_2__["default"])(instanceId, initialPrompt, selectedModel, chatbotName, ajaxUrl, nonce, initialState, isBlock, isShortcode, isElementor);
 
-      // Log the ActionProvider before passing it
-      console.log('Typeof ActionProvider:', typeof _chatbot_ActionProvider__WEBPACK_IMPORTED_MODULE_4__["default"]);
-      console.log('ActionProvider value:', _chatbot_ActionProvider__WEBPACK_IMPORTED_MODULE_4__["default"]);
-
       // Setup chatbot props - pass CLASSES/constructors directly, not instances or factory functions
       const chatbotProps = {
         config: botConfig,
@@ -668,6 +707,40 @@ domReady(() => {
     }
   });
 });
+
+/***/ }),
+
+/***/ "./src/frontend.scss":
+/*!***************************!*\
+  !*** ./src/frontend.scss ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./frontend */ "./src/frontend.js");
+/* harmony import */ var _block_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block/index */ "./src/block/index.js");
+/**
+ * Main frontend entry point
+ * This serves as the main entry point, importing all needed functionality
+ */
+
+
+
+// Also export any functions that might be needed externally
 
 /***/ }),
 
@@ -774,7 +847,42 @@ module.exports = window["ReactJSXRuntime"];
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -815,27 +923,68 @@ module.exports = window["ReactJSXRuntime"];
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"index": 0,
+/******/ 			"./style-index": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkeasy_ai_chat_embed"] = globalThis["webpackChunkeasy_ai_chat_embed"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
-(() => {
-"use strict";
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./frontend */ "./src/frontend.js");
-/* harmony import */ var _block_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block/index */ "./src/block/index.js");
-/**
- * Main frontend entry point
- * This serves as the main entry point, importing all needed functionality
- */
-
-
-
-// Also export any functions that might be needed externally
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["./style-index"], () => (__webpack_require__("./src/index.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

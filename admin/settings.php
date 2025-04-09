@@ -3,6 +3,7 @@
  * Admin Settings Page
  *
  * @package Easy_AI_Chat_Embed
+ * @since 1.0.0
  */
 
 // Exit if accessed directly.
@@ -12,20 +13,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Define model options (consistent with edit.js)
 const EASY_AI_CHAT_EMBED_MODEL_OPTIONS = [
-    [ 'value' => '',                 'label' => 'Select a Model' ],
+    [ 'value' => '',                        'label' => 'Select a Model' ],
     [ 'value' => 'gpt-4o-mini',             'label' => 'ChatGPT 4.0' ],
     [ 'value' => 'claude-3-7-sonnet-20250219', 'label' => 'Claude Sonnet 3.7' ],
-    [ 'value' => 'gemini-2.0-flash-lite',     'label' => 'Google Gemini' ],
+    [ 'value' => 'gemini-2.0-flash-lite',   'label' => 'Google Gemini' ],
 ];
 
 /**
  * Register the settings page and fields.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function easy_ai_chat_embed_register_settings() {
     // Register the main settings group and option name
     register_setting(
-        'easy_ai_chat_embed_options_group', // Option group
-        'easy_ai_chat_embed_settings',      // Option name (stores all settings as an array)
+        'easy_ai_chat_embed_options_group',    // Option group
+        'easy_ai_chat_embed_settings',         // Option name (stores all settings as an array)
         'easy_ai_chat_embed_sanitize_settings' // Sanitization callback
     );
 
@@ -106,6 +110,7 @@ add_action( 'admin_init', 'easy_ai_chat_embed_register_settings' );
 /**
  * Sanitize settings before saving.
  *
+ * @since 1.0.0
  * @param array $input Raw input data.
  * @return array Sanitized data.
  */
@@ -120,10 +125,14 @@ function easy_ai_chat_embed_sanitize_settings( $input ) {
 
     // Sanitize default model
     $allowed_models = wp_list_pluck( EASY_AI_CHAT_EMBED_MODEL_OPTIONS, 'value' );
-    $sanitized_input['default_model'] = isset( $input['default_model'] ) && in_array( $input['default_model'], $allowed_models ) ? $input['default_model'] : '';
+    $sanitized_input['default_model'] = isset( $input['default_model'] ) && in_array( $input['default_model'], $allowed_models, true ) 
+        ? $input['default_model'] 
+        : '';
 
     // Sanitize default initial prompt (allow empty)
-    $sanitized_input['default_initial_prompt'] = isset( $input['default_initial_prompt'] ) ? sanitize_textarea_field( $input['default_initial_prompt'] ) : '';
+    $sanitized_input['default_initial_prompt'] = isset( $input['default_initial_prompt'] ) 
+        ? sanitize_textarea_field( $input['default_initial_prompt'] ) 
+        : '';
 
     // Sanitize default chatbot name (default to 'AIChatBot')
     $sanitized_input['default_chatbot_name'] = isset( $input['default_chatbot_name'] ) && ! empty( trim( $input['default_chatbot_name'] ) )
@@ -136,6 +145,9 @@ function easy_ai_chat_embed_sanitize_settings( $input ) {
 
 /**
  * Callback for API keys section description.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function easy_ai_chat_embed_api_keys_section_callback() {
     echo '<p>' . esc_html__( 'Enter the API keys for the AI services you want to enable.', 'easy-ai-chat-embed' ) . '</p>';
@@ -143,6 +155,9 @@ function easy_ai_chat_embed_api_keys_section_callback() {
 
 /**
  * Callback for defaults section description.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function easy_ai_chat_embed_defaults_section_callback() {
     echo '<p>' . esc_html__( 'Set the default model and initial prompt for new chat instances (can be overridden per instance).', 'easy-ai-chat-embed' ) . '</p>';
@@ -151,12 +166,15 @@ function easy_ai_chat_embed_defaults_section_callback() {
 /**
  * Render API Key input field.
  *
+ * @since 1.0.0
  * @param array $args Field arguments (contains 'key').
+ * @return void
  */
 function easy_ai_chat_embed_render_api_key_field( $args ) {
     $options = get_option( 'easy_ai_chat_embed_settings' );
     $key_name = $args['key'];
     $value = isset( $options[ $key_name ] ) ? esc_attr( $options[ $key_name ] ) : '';
+    
     printf(
         '<input type="password" id="%1$s" name="easy_ai_chat_embed_settings[%1$s]" value="%2$s" class="regular-text" />',
         esc_attr( $key_name ),
@@ -167,6 +185,9 @@ function easy_ai_chat_embed_render_api_key_field( $args ) {
 
 /**
  * Render Default Model select field.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function easy_ai_chat_embed_render_default_model_field() {
     $options = get_option( 'easy_ai_chat_embed_settings' );
@@ -186,20 +207,28 @@ function easy_ai_chat_embed_render_default_model_field() {
 
 /**
  * Render Default Initial Prompt textarea field.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function easy_ai_chat_embed_render_default_prompt_field() {
     $options = get_option( 'easy_ai_chat_embed_settings' );
     $value = isset( $options['default_initial_prompt'] ) ? esc_textarea( $options['default_initial_prompt'] ) : '';
+    
     echo '<textarea id="default_initial_prompt" name="easy_ai_chat_embed_settings[default_initial_prompt]" rows="5" cols="50" class="large-text code">' . $value . '</textarea>';
     echo '<p class="description">' . esc_html__( 'Optional text prepended to every user prompt to guide the AI by default.', 'easy-ai-chat-embed' ) . '</p>';
 }
 
 /**
  * Render Default Chatbot Name input field.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function easy_ai_chat_embed_render_default_chatbot_name_field() {
     $options = get_option( 'easy_ai_chat_embed_settings' );
     $value = isset( $options['default_chatbot_name'] ) ? esc_attr( $options['default_chatbot_name'] ) : 'AIChatBot'; // Default display value
+    
     printf(
         '<input type="text" id="default_chatbot_name" name="easy_ai_chat_embed_settings[default_chatbot_name]" value="%s" class="regular-text" />',
         $value
@@ -209,6 +238,9 @@ function easy_ai_chat_embed_render_default_chatbot_name_field() {
 
 /**
  * Render the main settings page HTML.
+ *
+ * @since 1.0.0
+ * @return void
  */
 function easy_ai_chat_embed_render_settings_page() {
     ?>
