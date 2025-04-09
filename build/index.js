@@ -334,20 +334,13 @@ class ActionProvider {
     this.createClientMessage = createClientMessage;
   }
 
-  // Handle user messages and API calls
+  // Main handler for user messages - now delegates to smaller functions
   handleUserMessage = async (userMessage, currentState) => {
-    // Get instance data from global object
-    const instances = window.easyAiChatInstances || {};
-    const instanceKeys = Object.keys(instances);
-    if (instanceKeys.length === 0) {
-      console.error('No chat instances found in global storage');
-      const errorMessage = this.createChatBotMessage("I'm sorry, but there was an error processing your request. No configuration found.");
-      this.addMessageToState(errorMessage);
-      return;
+    // 1. Get the appropriate instance
+    const instance = this.getAppropriateInstance(currentState);
+    if (!instance) {
+      return; // Error already handled in getAppropriateInstance
     }
-
-    // Use the first instance (this is a simplification - ideally would match the current instance)
-    const instance = instances[instanceKeys[0]];
     const {
       instanceId,
       selectedModel,
@@ -356,11 +349,72 @@ class ActionProvider {
       nonce
     } = instance;
 
-    // Add a loading message
+    // 2. Show loading indicator
+    this.showLoadingIndicator();
+
+    // 3. Format conversation history
+    const conversationHistory = this.formatConversationHistory(currentState);
+
+    // 4. Prepare request data
+    const requestData = {
+      action: 'easy_ai_chat_embed_send_message',
+      _ajax_nonce: nonce,
+      message: userMessage,
+      instanceId: instanceId,
+      selectedModel: selectedModel,
+      initialPrompt: initialPrompt,
+      conversationHistory: JSON.stringify(conversationHistory)
+    };
+
+    // 5. Send the request and handle response
+    try {
+      const result = await this.sendApiRequest(ajaxUrl, requestData);
+      this.handleApiResponse(result);
+    } catch (error) {
+      this.handleApiError(error);
+    }
+  };
+
+  // Get the appropriate instance based on current state
+  getAppropriateInstance = currentState => {
+    // Get current instance ID from state if available
+    let currentInstanceId = '';
+    if (currentState && currentState.instanceId) {
+      currentInstanceId = currentState.instanceId;
+    }
+
+    // Get instance data from global object
+    const instances = window.easyAiChatInstances || {};
+
+    // No instances found
+    if (Object.keys(instances).length === 0) {
+      console.error('No chat instances found in global storage');
+      const errorMessage = this.createChatBotMessage(__("I'm unable to process your request at this time. Please try again later.", 'easy-ai-chat-embed'));
+      this.addMessageToState(errorMessage);
+      return null;
+    }
+
+    // First try to find the matching instance by ID from state
+    let instance = null;
+    if (currentInstanceId && instances[currentInstanceId]) {
+      instance = instances[currentInstanceId];
+    } else {
+      // Fallback to the first instance as before
+      const instanceKeys = Object.keys(instances);
+      instance = instances[instanceKeys[0]];
+      console.warn('Using fallback instance selection mechanism');
+    }
+    return instance;
+  };
+
+  // Show the loading indicator
+  showLoadingIndicator = () => {
     const loadingMessage = this.createChatBotMessage('Thinking...');
     this.addMessageToState(loadingMessage);
+  };
 
-    // Format conversation history directly here
+  // Format conversation history from current state
+  formatConversationHistory = currentState => {
     let conversationHistory = [];
     if (currentState && Array.isArray(currentState.messages)) {
       conversationHistory = currentState.messages.map(message => ({
@@ -369,51 +423,54 @@ class ActionProvider {
         message: message.message
       }));
     } else {
+      // Only log warning, don't expose to user
       console.warn('ActionProvider: currentState or currentState.messages not available for history.');
     }
+    return conversationHistory;
+  };
 
-    // Prepare AJAX request
-    const requestData = {
-      action: 'easy_ai_chat_embed_send_message',
-      _ajax_nonce: nonce,
-      message: userMessage,
-      instanceId: instanceId,
-      selectedModel: selectedModel,
-      initialPrompt: initialPrompt,
-      // Use the directly formatted history
-      conversationHistory: JSON.stringify(conversationHistory) // Send empty array if state was undefined
-    };
-    try {
-      const response = await fetch(ajaxUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams(requestData).toString()
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const result = await response.json();
+  // Send API request and get response
+  sendApiRequest = async (ajaxUrl, requestData) => {
+    const response = await fetch(ajaxUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams(requestData).toString()
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return await response.json();
+  };
 
-      // Remove loading message
-      this.removeLastMessage();
+  // Handle successful API response
+  handleApiResponse = result => {
+    // Remove loading message
+    this.removeLastMessage();
 
-      // Display response or error message
-      if (result.success && result.data.message) {
-        const botResponse = this.createChatBotMessage(result.data.message);
-        this.addMessageToState(botResponse);
-      } else {
-        const errorMessage = result.data?.message || 'Sorry, I could not process your request.';
-        const botError = this.createChatBotMessage(__('[Error]', 'easy-ai-chat-embed') + ' ' + errorMessage);
-        this.addMessageToState(botError);
-      }
-    } catch (error) {
-      console.error('Error calling backend API:', error);
-      this.removeLastMessage();
-      const botError = this.createChatBotMessage(__('[Error] Sorry, something went wrong while contacting the AI. Please try again later.', 'easy-ai-chat-embed'));
+    // Display response or error message
+    if (result.success && result.data.message) {
+      const botResponse = this.createChatBotMessage(result.data.message);
+      this.addMessageToState(botResponse);
+    } else {
+      // Log detailed error for debugging
+      console.error('API Error:', result.data?.message || 'Unknown error');
+      // Show generic message to user
+      const botError = this.createChatBotMessage(__('Sorry, I encountered a problem processing your request. Please try again later.', 'easy-ai-chat-embed'));
       this.addMessageToState(botError);
     }
+  };
+
+  // Handle API errors
+  handleApiError = error => {
+    // Log the full error to console for debugging
+    console.error('Error calling backend API:', error);
+    // Remove loading message
+    this.removeLastMessage();
+    // Show generic message to users
+    const botError = this.createChatBotMessage(__('Sorry, I was unable to connect to the AI service. Please try again later.', 'easy-ai-chat-embed'));
+    this.addMessageToState(botError);
   };
 
   // Helper to add messages to state
@@ -451,8 +508,7 @@ __webpack_require__.r(__webpack_exports__);
 class MessageParser {
   constructor(actionProvider, state) {
     this.actionProvider = actionProvider;
-    this.state = state;
-    console.log('MessageParser constructor state:', state); // Add log here
+    this.state = state || {}; // Add fallback for undefined state
   }
   parse(message) {
     // console.log( 'User message:', message ); // Log user input
@@ -460,9 +516,39 @@ class MessageParser {
 
     // Simple implementation: pass every non-empty message to the action provider
     if (message.trim() !== '') {
-      console.log('MessageParser parse state:', this.state); // Add log here
-      // Pass the current state along to the action provider
-      this.actionProvider.handleUserMessage(message, this.state);
+      // Attempt to get the container the chatbot is running in
+      // This helps with finding the correct instance ID
+      let instanceId = '';
+      try {
+        // Try to find the instance ID from the DOM
+        const container = document.querySelector('[data-eace-current-instance]');
+        if (container) {
+          instanceId = container.getAttribute('data-eace-current-instance');
+        }
+
+        // If we still don't have an ID from the DOM and this.state exists,
+        // try to get it from state
+        if (!instanceId && this.state && this.state.instanceId) {
+          instanceId = this.state.instanceId;
+        }
+
+        // Create a minimal state object if none exists
+        const safeState = this.state || {};
+
+        // Override the instanceId in the state if we found one in the DOM
+        if (instanceId) {
+          safeState.instanceId = instanceId;
+        }
+
+        // Pass the message and safe state to the action provider
+        this.actionProvider.handleUserMessage(message, safeState);
+      } catch (error) {
+        console.error('Error in MessageParser.parse:', error);
+        // Even on error, try to pass the message to avoid a broken UX
+        this.actionProvider.handleUserMessage(message, {
+          instanceId
+        });
+      }
     }
   }
 }
@@ -661,13 +747,18 @@ domReady(() => {
       chatbotName // Store chatbot name
     };
 
-    // Build state object
+    // Create a custom attribute to store the current instance ID
+    // This will be used for targeting the specific instance later
+    container.setAttribute('data-eace-current-instance', instanceId);
+
+    // Build state object with instance identifier
     const initialState = {
       messages: [],
       instanceId: instanceId,
+      // Include instance ID in the state
       selectedModel: selectedModel,
       initialPrompt: initialPrompt,
-      chatbotName: chatbotName // Add chatbot name to state
+      chatbotName: chatbotName
     };
     try {
       // Get configuration with instance details, ajax info, initial state, and type flag

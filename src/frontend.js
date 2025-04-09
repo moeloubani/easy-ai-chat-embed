@@ -86,13 +86,17 @@ domReady( () => {
 			chatbotName // Store chatbot name
 		};
 
-		// Build state object
+		// Create a custom attribute to store the current instance ID
+		// This will be used for targeting the specific instance later
+		container.setAttribute('data-eace-current-instance', instanceId);
+
+		// Build state object with instance identifier
 		const initialState = {
 			messages: [],
-			instanceId: instanceId,
+			instanceId: instanceId, // Include instance ID in the state
 			selectedModel: selectedModel,
 			initialPrompt: initialPrompt,
-			chatbotName: chatbotName, // Add chatbot name to state
+			chatbotName: chatbotName,
 		};
 
 		try {
