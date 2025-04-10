@@ -94,6 +94,9 @@ Where do I get an API key for this plugin?
 
 ## Changelog
 
+### 1.0.1
+*   Updated bot avatar
+
 ### 1.0.0
 *   Initial release.
 *   Features: Gutenberg block, shortcode, Elementor widget, settings page, OpenAI/Anthropic/Google API integration.
