@@ -1,13 +1,21 @@
 # Easy AI Chat Embed
 
 **Contributors:** Moe Loubani
+
 **Author URI:** https://moe.ca
+
 **Tags:** chat, chatbot, ai, artificial intelligence, gpt, openai, claude, anthropic, gemini, google, gutenberg, block, shortcode, elementor
+
 **Requires at least:** 6.0
+
 **Tested up to:** 6.5
+
 **Requires PHP:** 7.4
+
 **Stable tag:** 1.0.0
+
 **License:** GPLv2 or later
+
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
 Embeds an AI-powered chat interface (supporting OpenAI, Anthropic, and Google models) into your WordPress site via Gutenberg block, shortcode, or Elementor widget.
