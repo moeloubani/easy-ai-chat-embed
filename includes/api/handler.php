@@ -379,40 +379,46 @@ function easy_ai_chat_embed_call_google( $api_key, $user_message, $initial_promp
 	// Google's API endpoint includes the model name and API key
 	$api_endpoint = sprintf(
 		'https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent?key=%s', 
-		esc_url_raw( $selected_model ), 
-		esc_url_raw( $api_key )
+		urlencode( $selected_model ), // Use urlencode instead of esc_url_raw for the model name
+		urlencode( $api_key )
 	);
 
 	$contents = [];
 	// Format conversation history
-    $formatted_history = [];
     foreach ( $history as $hist_msg ) {
         // Map 'assistant' back to 'model' for Google API
         $role = ( $hist_msg['role'] === 'user' ) ? 'user' : 'model';
         if ( ! empty( $hist_msg['content'] ) ) {
-            $formatted_history[] = [
+            $contents[] = [
                 'role' => $role,
                 'parts' => [[ 'text' => $hist_msg['content'] ]]
             ];
         }
     }
-    $contents = $formatted_history;
 
-	// Combine initial prompt (if any) with the first user message *only if history is empty*
-	$current_message_content = ( ! empty( $initial_prompt ) && empty( $history ) ? $initial_prompt . "\n\n" : '' ) . $user_message;
+	// Add the current user message directly
 	$contents[] = [
 		'role' => 'user',
-		'parts' => [ [ 'text' => $current_message_content ] ]
+		'parts' => [ [ 'text' => $user_message ] ] // Use $user_message directly
 	];
 
-	$request_body = wp_json_encode( [
+	$request_data = [
 		'contents' => $contents,
 		// Add generationConfig if needed (temperature, maxOutputTokens, etc.)
 		// 'generationConfig' => [
 		//     'temperature' => 0.7,
 		//     'maxOutputTokens' => 1000,
 		// ]
-	] );
+	];
+
+	// Add system instruction if provided
+	if ( ! empty( $initial_prompt ) ) {
+		$request_data['systemInstruction'] = [
+			'parts' => [ [ 'text' => $initial_prompt ] ]
+		];
+	}
+
+	$request_body = wp_json_encode( $request_data );
 
 	if ( json_last_error() !== JSON_ERROR_NONE ) {
 		return new WP_Error( 
@@ -467,6 +473,7 @@ function easy_ai_chat_embed_call_google( $api_key, $user_message, $initial_promp
 		/* translators: %s: Reason provided by API for stopping (e.g., 'SAFETY'). */
 		return new WP_Error(
 			'google_blocked_response',
+			// translators: %s: Error message from the Google API.
 			sprintf( __( 'Google AI response generation stopped due to: %s', 'easy-ai-chat-embed' ), $result['candidates'][0]['finishReason'] )
 		);
 	} else {
