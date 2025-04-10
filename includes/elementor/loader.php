@@ -23,7 +23,7 @@ function easy_ai_chat_embed_register_elementor_widget( $widgets_manager ) {
 	require_once $widget_file;
 
 	// Make sure the class exists before registering
-	if (class_exists('\\Easy_AI_Chat_Embed\\Includes\\Elementor\\Easy_AI_Chat_Embed_Elementor_Widget')) {
+	if (class_exists('\Easy_AI_Chat_Embed\Includes\Elementor\Easy_AI_Chat_Embed_Elementor_Widget')) {
 		// Create widget instance
 		$widget = new \Easy_AI_Chat_Embed\Includes\Elementor\Easy_AI_Chat_Embed_Elementor_Widget();
 		

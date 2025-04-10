@@ -4,6 +4,11 @@
 import { createChatBotMessage } from 'react-chatbot-kit';
 
 /**
+ * Internal dependencies
+ */
+import BotAvatar from './BotAvatar'; // Import the UserAvatar component
+
+/**
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
@@ -33,9 +38,10 @@ const configFn = ( instanceId, initialPrompt, selectedModel, chatbotName, ajaxUr
 		chatbotName: chatbotName, // Store chatbotName in state too
 		...initialState         // Merge the rest of the initial state
 	},
-	// Add custom header component
+	// Add custom header component and replace BotAvatar with UserAvatar
 	customComponents: {
-		header: () => <div className="react-chatbot-kit-chat-header">Conversation with {chatbotName}</div>
+		header: () => <div className="react-chatbot-kit-chat-header">Conversation with {chatbotName}</div>,
+		botAvatar: ( props ) => <BotAvatar { ...props } />,
 	},
 	// Define custom components or widgets here if needed later
 	// widgets: [],

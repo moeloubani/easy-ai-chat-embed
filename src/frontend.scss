@@ -155,4 +155,15 @@
     padding: 15px;
     background-color: #f8f9fa;
     text-align: center;
+
+    .react-chatbot-kit-bot-avatar {
+        margin-left: auto;
+
+        .react-chatbot-kit-user-avatar-container {
+            background-color: #828282;
+            margin-left: 0;
+            margin-right: 12.5px;
+        }
+    }
 }
+
