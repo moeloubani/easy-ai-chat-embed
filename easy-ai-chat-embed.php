@@ -26,11 +26,11 @@ define( 'EASY_AI_CHAT_EMBED_VERSION', '1.0.1' );
 define( 'EASY_AI_CHAT_EMBED_PATH', plugin_dir_path( __FILE__ ) );
 define( 'EASY_AI_CHAT_EMBED_URL', plugin_dir_url( __FILE__ ) );
 
-// Uncomment when ready for translation support
-// function easy_ai_chat_embed_load_textdomain() {
-// 	load_plugin_textdomain( 'easy-ai-chat-embed', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-// }
-// add_action( 'plugins_loaded', 'easy_ai_chat_embed_load_textdomain' );
+// Load textdomain
+function easy_ai_chat_embed_load_textdomain() {
+	load_plugin_textdomain( 'easy-ai-chat-embed', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+add_action( 'plugins_loaded', 'easy_ai_chat_embed_load_textdomain' );
 
 // Include necessary files
 require_once EASY_AI_CHAT_EMBED_PATH . 'includes/api/handler.php';
