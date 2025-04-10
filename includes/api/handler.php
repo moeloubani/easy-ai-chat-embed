@@ -148,8 +148,6 @@ function easy_ai_chat_embed_ajax_send_message() {
 
 		// Handle errors
 		if ( $error ) {
-			// Log the error for admins
-			easy_ai_chat_embed_log_api_error( $error, $selected_model );
 			throw new Exception( $error->get_error_message() );
 		}
 
