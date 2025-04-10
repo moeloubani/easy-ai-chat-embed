@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once dirname( __FILE__ ) . '/openai.php';
 require_once dirname( __FILE__ ) . '/anthropic.php';
 require_once dirname( __FILE__ ) . '/google.php';
-require_once dirname( __FILE__ ) . '/utilities.php';
 
 /**
  * AJAX handler for sending messages to the AI.
