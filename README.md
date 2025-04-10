@@ -89,7 +89,7 @@ Example:
 
 ## Frequently Asked Questions
 
-*   Where do I get an API key for this plugin?
+Where do I get an API key for this plugin?
    * You can find the API keys on the different AI language model websites.   
 
 ## Changelog
