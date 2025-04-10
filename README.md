@@ -89,19 +89,11 @@ Example:
 
 ## Frequently Asked Questions
 
-*   **(Add relevant FAQs here if any)**
+*   Where do I get an API key for this plugin?
+   * You can find the API keys on the different AI language model websites.   
 
 ## Changelog
 
 ### 1.0.0
 *   Initial release.
 *   Features: Gutenberg block, shortcode, Elementor widget, settings page, OpenAI/Anthropic/Google API integration.
-
-## TODO / Future Enhancements
-
-*   Implement conversation history handling.
-*   Refine styling and theme compatibility.
-*   Add option for users to select model on the frontend (if desired).
-*   Improve asset enqueuing logic for multiple instances.
-*   Add more robust error display options.
-*   Add unit/integration tests.
