@@ -1,6 +1,7 @@
 # Easy AI Chat Embed
 
-**Contributors:** Your Name or Company
+**Contributors:** Moe Loubani
+**Author URI:** https://moe.ca
 **Tags:** chat, chatbot, ai, artificial intelligence, gpt, openai, claude, anthropic, gemini, google, gutenberg, block, shortcode, elementor
 **Requires at least:** 6.0
 **Tested up to:** 6.5
@@ -57,9 +58,16 @@ Insert the following shortcode into any post, page, or text widget:
 
 `[easy_ai_chat_embed]`
 
-This will use the default model and prompt configured in the plugin settings.
+This will use the default model, prompt, and chatbot name configured in the plugin settings.
 
-*(Note: Currently, overriding settings via shortcode attributes is not implemented.)*
+You can override the defaults using the following attributes:
+
+*   `model`: Specify the AI model ID to use (e.g., `gpt-4`, `claude-3-opus-20240229`).
+*   `prompt`: Provide a custom initial system prompt.
+*   `name`: Set a custom name for the chatbot.
+
+Example:
+`[easy_ai_chat_embed model="gpt-4-turbo" prompt="You are a helpful assistant." name="Support Bot"]`
 
 ### Elementor Widget
 
@@ -84,7 +92,6 @@ This will use the default model and prompt configured in the plugin settings.
 ## TODO / Future Enhancements
 
 *   Implement conversation history handling.
-*   Allow overriding settings via shortcode attributes.
 *   Refine styling and theme compatibility.
 *   Add option for users to select model on the frontend (if desired).
 *   Improve asset enqueuing logic for multiple instances.

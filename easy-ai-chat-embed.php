@@ -6,8 +6,8 @@
  * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
- * Author:            Your Name or Company
- * Author URI:        #
+ * Author:            Moe Loubani
+ * Author URI:        https://moe.ca
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       easy-ai-chat-embed
@@ -105,17 +105,13 @@ function easy_ai_chat_embed_render_block( $attributes, $content, $block ) {
                       ? $attributes['chatbotName'] 
                       : $default_chatbot_name;
 
-    // Update attributes array passed to JS to include the final chatbot name
-    $attributes_for_js = $attributes;
-    $attributes_for_js['chatbotName'] = $chatbot_name;
+    // Enqueue required assets for this block instance
+    easy_ai_chat_embed_enqueue_assets();
 
-	// Flag that assets need to be enqueued
-	wp_add_inline_script( 'wp-hooks', 'window.easyAiChatEmbedShouldEnqueue = true;', 'before' );
-
-	// Return the block content wrapper
-	// Ensure the wrapper has the necessary data attributes for the JS to find
+    // Return the block content wrapper
+    // Ensure the wrapper has the necessary data attributes for the JS to find
     // Add the common instance class
-	$wrapper_attributes = get_block_wrapper_attributes(
+    $wrapper_attributes = get_block_wrapper_attributes(
         [
             'class' => 'easy-ai-chat-embed-instance', // Ensure common class
             'data-instance-id' => esc_attr( $attributes['instanceId'] ),
@@ -125,11 +121,11 @@ function easy_ai_chat_embed_render_block( $attributes, $content, $block ) {
             'data-is-block' => 'true' // Add flag for JS if needed
         ]
     );
-	return sprintf(
-		'<div %s><noscript>%s</noscript></div>',
-		$wrapper_attributes,
+    return sprintf(
+        '<div %s><noscript>%s</noscript></div>',
+        $wrapper_attributes,
         esc_html__( 'This chat interface requires JavaScript to be enabled.', 'easy-ai-chat-embed' )
-	);
+    );
 }
 
 /**
@@ -156,8 +152,8 @@ function easy_ai_chat_embed_shortcode_handler( $atts ) {
     $chatbot_name = isset( $atts['name'] ) ? $atts['name'] : $default_chatbot_name; // Use 'name' attribute for shortcode
     $instance_id = uniqid( 'easy-ai-chat-embed-shortcode-' ); // Generate unique ID for shortcode instance
 
-    // Flag that assets need to be enqueued
-    wp_add_inline_script( 'wp-hooks', 'window.easyAiChatEmbedShouldEnqueue = true;', 'before' );
+    // Enqueue required assets for this shortcode instance
+    easy_ai_chat_embed_enqueue_assets();
 
     // Return the placeholder div where the React app will mount
     return sprintf(
@@ -172,52 +168,62 @@ function easy_ai_chat_embed_shortcode_handler( $atts ) {
 
 /**
  * Centralized function to enqueue frontend assets.
+ * 
+ * Called directly from render_callback and shortcode handler
+ * rather than being hooked to wp_enqueue_scripts to avoid loading
+ * assets on pages where they're not needed.
  *
  * @since 1.0.0
  * @return void
  */
-function easy_ai_chat_embed_enqueue_frontend_assets() {
-    $script_handle = 'easy-ai-chat-embed-frontend'; // Use a consistent handle
+function easy_ai_chat_embed_enqueue_assets() {
+    static $assets_loaded = false;
+    
+    // Only load assets once per page
+    if ($assets_loaded) {
+        return;
+    }
+    
+    $script_handle = 'easy-ai-chat-embed-frontend';
+    
+    $script_asset_path = EASY_AI_CHAT_EMBED_PATH . 'build/index.asset.php';
+    $style_path = EASY_AI_CHAT_EMBED_PATH . 'build/index.css';
 
-    // Only enqueue if the handle hasn't been enqueued yet
-    if ( ! wp_script_is( $script_handle, 'enqueued' ) ) {
-        $script_asset_path = EASY_AI_CHAT_EMBED_PATH . 'build/index.asset.php';
-        $style_path = EASY_AI_CHAT_EMBED_PATH . 'build/index.css';
+    if (file_exists($script_asset_path)) {
+        $script_asset = require $script_asset_path;
+        
+        wp_enqueue_script(
+            $script_handle,
+            EASY_AI_CHAT_EMBED_URL . 'build/index.js',
+            array_merge($script_asset['dependencies'], array('wp-element', 'wp-i18n', 'wp-dom-ready', 'react')),
+            $script_asset['version'],
+            true // Load in footer.
+        );
 
-        if ( file_exists( $script_asset_path ) ) {
-            $script_asset = require $script_asset_path;
-            wp_enqueue_script(
-                $script_handle,
-                EASY_AI_CHAT_EMBED_URL . 'build/index.js',
-                array_merge( $script_asset['dependencies'], array( 'wp-element', 'wp-i18n', 'wp-dom-ready', 'react' ) ),
-                $script_asset['version'],
-                true // Load in footer.
-            );
-
-            // Enqueue style if it exists
-            if ( file_exists( $style_path ) ) {
-                wp_enqueue_style(
-                    $script_handle, // Use same handle for style for simplicity
-                    EASY_AI_CHAT_EMBED_URL . 'build/index.css',
-                    [],
-                    $script_asset['version']
-                );
-            }
-
-            // Localize script ONCE with common data
-            wp_localize_script(
-                $script_handle,
-                'easyAiChatEmbedGlobalData', // Single global object
-                [
-                    'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-                    'nonce'   => wp_create_nonce( 'easy_ai_chat_embed_nonce' ),
-                    // Add any other truly global settings here if needed later
-                ]
+        // Enqueue style if it exists
+        if (file_exists($style_path)) {
+            wp_enqueue_style(
+                $script_handle, // Use same handle for style for simplicity
+                EASY_AI_CHAT_EMBED_URL . 'build/index.css',
+                [],
+                $script_asset['version']
             );
         }
+
+        // Localize script with common data
+        wp_localize_script(
+            $script_handle,
+            'easyAiChatEmbedGlobalData',
+            [
+                'ajaxUrl' => admin_url('admin-ajax.php'),
+                'nonce'   => wp_create_nonce('easy_ai_chat_embed_nonce'),
+            ]
+        );
+        
+        // Mark assets as loaded to prevent duplicate loading
+        $assets_loaded = true;
     }
 }
-add_action( 'wp_enqueue_scripts', 'easy_ai_chat_embed_enqueue_frontend_assets' );
 
 /**
  * Add the admin menu item for the settings page.

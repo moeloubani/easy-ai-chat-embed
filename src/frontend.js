@@ -38,7 +38,8 @@ domReady( () => {
 	const globalData = window.easyAiChatEmbedGlobalData;
 
 	if (!globalData) {
-		console.error('Easy AI Chat Embed: Global data object (easyAiChatEmbedGlobalData) not found. Assets might not have been enqueued correctly.');
+		// Keep critical error log
+		console.error('Easy AI Chat Embed: Global data object missing. Assets might not have been enqueued correctly.');
 		// Optionally, update container innerHTML to show an error
 		chatContainers.forEach(container => {
 			if (!container.innerHTML.includes('noscript')) { // Avoid overwriting noscript tag if JS is disabled
@@ -64,11 +65,14 @@ domReady( () => {
 
 		// Basic validation (ensure we have necessary data)
 		if ( ! instanceId || ! selectedModel || !ajaxUrl || !nonce || !chatbotName ) {
-			console.error(
-				'Easy AI Chat Embed: Missing required data for instance.',
-				container,
-				{ instanceId, selectedModel, chatbotName, ajaxUrl, nonce }
-			);
+			// Keep critical error log
+			console.error('Easy AI Chat Embed: Missing required data for instance.');
+			
+			// In non-production environments, log more details
+			if (process.env.NODE_ENV !== 'production') {
+				console.error('Missing values:', { instanceId, selectedModel, chatbotName, ajaxUrl, nonce });
+			}
+			
 			// Update container HTML only if it doesn't already contain the noscript message
 			if (!container.querySelector('noscript')) {
 				 container.innerHTML = '<p>Error: Chatbot configuration missing or incomplete.</p>';
@@ -133,8 +137,9 @@ domReady( () => {
 				render( chatElement, container );
 			}
 		} catch (error) {
+			// Keep critical error log
 			console.error('Error initializing chatbot:', error);
-			container.innerHTML = '<p>Error initializing chat interface. See console for details.</p>';
+			container.innerHTML = '<p>Error initializing chat interface. Please try again later.</p>';
 		}
 	} );
 } ); 

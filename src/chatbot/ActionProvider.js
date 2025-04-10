@@ -64,7 +64,8 @@ class ActionProvider {
 		
 		// No instances found
 		if (Object.keys(instances).length === 0) {
-			console.error('No chat instances found in global storage');
+			// Keep this error log as it's critical for debugging
+			console.error('Error: No chat instances found in global storage');
 			const errorMessage = this.createChatBotMessage(
 				__("I'm unable to process your request at this time. Please try again later.", 'easy-ai-chat-embed')
 			);
@@ -80,7 +81,10 @@ class ActionProvider {
 			// Fallback to the first instance as before
 			const instanceKeys = Object.keys(instances);
 			instance = instances[instanceKeys[0]];
-			console.warn('Using fallback instance selection mechanism');
+			// Only log in non-production environments or when debugging
+			if (process.env.NODE_ENV !== 'production') {
+				console.warn('Using fallback instance selection mechanism');
+			}
 		}
 		
 		return instance;
@@ -101,8 +105,10 @@ class ActionProvider {
 				message: message.message
 			}));
 		} else {
-			// Only log warning, don't expose to user
-			console.warn('ActionProvider: currentState or currentState.messages not available for history.');
+			// Only log warning in non-production environments
+			if (process.env.NODE_ENV !== 'production') {
+				console.warn('ActionProvider: currentState or currentState.messages not available for history.');
+			}
 		}
 		return conversationHistory;
 	};

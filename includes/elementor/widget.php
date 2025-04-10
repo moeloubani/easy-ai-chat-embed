@@ -144,21 +144,21 @@ class Easy_AI_Chat_Embed_Elementor_Widget extends \Elementor\Widget_Base {
         // Generate a unique ID for this instance
         $instance_id = 'eace-elementor-' . $this->get_id();
 
-        // --- REMOVE ENQUEUING/LOCALIZATION FROM HERE ---
-        // Assets are now enqueued globally via easy_ai_chat_embed_enqueue_frontend_assets()
-        // Ensure the global enqueuing function runs by flagging
-        wp_add_inline_script( 'wp-hooks', 'window.easyAiChatEmbedShouldEnqueue = true;', 'before' );
-
+        // Enqueue assets directly using the new function
+        if (function_exists('easy_ai_chat_embed_enqueue_assets')) {
+            easy_ai_chat_embed_enqueue_assets();
+        }
 
         // Output the container div for the React app to mount
         // Ensure it has the common class and all necessary data attributes
         printf(
-            '<div id="%s" class="easy-ai-chat-embed-instance" data-selected-model="%s" data-initial-prompt="%s" data-instance-id="%s" data-chatbot-name="%s" data-is-elementor="true"><noscript>%s</noscript></div>',
+            '<div id="%s" class="easy-ai-chat-embed-instance" data-selected-model="%s" data-initial-prompt="%s" data-instance-id="%s" data-chatbot-name="%s" data-is-elementor="true" data-eace-current-instance="%s"><noscript>%s</noscript></div>',
             esc_attr( $instance_id ), // Use the unique ID as the element ID
             esc_attr( $selected_model ),
             esc_attr( $initial_prompt ),
             esc_attr( $instance_id ),
             esc_attr( $chatbot_name ), // Add chatbot name
+            esc_attr( $instance_id ), // Add the data-eace-current-instance attribute
             esc_html__( 'This chat interface requires JavaScript to be enabled.', 'easy-ai-chat-embed' ) // Add noscript
         );
     }

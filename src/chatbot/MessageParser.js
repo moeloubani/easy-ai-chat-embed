@@ -6,9 +6,6 @@ class MessageParser {
 	}
 
 	parse( message ) {
-		// console.log( 'User message:', message ); // Log user input
-		// console.log( 'Current state:', this.state ); // Log state for debugging
-
 		// Simple implementation: pass every non-empty message to the action provider
 		if ( message.trim() !== '' ) {
 			// Attempt to get the container the chatbot is running in
@@ -39,7 +36,8 @@ class MessageParser {
 				// Pass the message and safe state to the action provider
 				this.actionProvider.handleUserMessage( message, safeState );
 			} catch (error) {
-				console.error('Error in MessageParser.parse:', error);
+				// Keep critical error log
+				console.error('Critical error in message processing:', error);
 				// Even on error, try to pass the message to avoid a broken UX
 				this.actionProvider.handleUserMessage( message, { instanceId } );
 			}

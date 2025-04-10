@@ -1,1 +1,8 @@
 node_modules
+.cursor
+.cursor/rules
+.cursor/settings
+.cursor/settings.json
+.cursor/settings.jsonc
+.cursor/settings.jsonc.disabled
+.cursor/settings.jsonc.disabled.disabled

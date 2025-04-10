@@ -388,7 +388,8 @@ class ActionProvider {
 
     // No instances found
     if (Object.keys(instances).length === 0) {
-      console.error('No chat instances found in global storage');
+      // Keep this error log as it's critical for debugging
+      console.error('Error: No chat instances found in global storage');
       const errorMessage = this.createChatBotMessage(__("I'm unable to process your request at this time. Please try again later.", 'easy-ai-chat-embed'));
       this.addMessageToState(errorMessage);
       return null;
@@ -402,7 +403,10 @@ class ActionProvider {
       // Fallback to the first instance as before
       const instanceKeys = Object.keys(instances);
       instance = instances[instanceKeys[0]];
-      console.warn('Using fallback instance selection mechanism');
+      // Only log in non-production environments or when debugging
+      if (true) {
+        console.warn('Using fallback instance selection mechanism');
+      }
     }
     return instance;
   };
@@ -423,8 +427,10 @@ class ActionProvider {
         message: message.message
       }));
     } else {
-      // Only log warning, don't expose to user
-      console.warn('ActionProvider: currentState or currentState.messages not available for history.');
+      // Only log warning in non-production environments
+      if (true) {
+        console.warn('ActionProvider: currentState or currentState.messages not available for history.');
+      }
     }
     return conversationHistory;
   };
@@ -511,9 +517,6 @@ class MessageParser {
     this.state = state || {}; // Add fallback for undefined state
   }
   parse(message) {
-    // console.log( 'User message:', message ); // Log user input
-    // console.log( 'Current state:', this.state ); // Log state for debugging
-
     // Simple implementation: pass every non-empty message to the action provider
     if (message.trim() !== '') {
       // Attempt to get the container the chatbot is running in
@@ -543,7 +546,8 @@ class MessageParser {
         // Pass the message and safe state to the action provider
         this.actionProvider.handleUserMessage(message, safeState);
       } catch (error) {
-        console.error('Error in MessageParser.parse:', error);
+        // Keep critical error log
+        console.error('Critical error in message processing:', error);
         // Even on error, try to pass the message to avoid a broken UX
         this.actionProvider.handleUserMessage(message, {
           instanceId
@@ -697,7 +701,8 @@ domReady(() => {
   // Get global data (should be available if script was enqueued)
   const globalData = window.easyAiChatEmbedGlobalData;
   if (!globalData) {
-    console.error('Easy AI Chat Embed: Global data object (easyAiChatEmbedGlobalData) not found. Assets might not have been enqueued correctly.');
+    // Keep critical error log
+    console.error('Easy AI Chat Embed: Global data object missing. Assets might not have been enqueued correctly.');
     // Optionally, update container innerHTML to show an error
     chatContainers.forEach(container => {
       if (!container.innerHTML.includes('noscript')) {
@@ -723,13 +728,20 @@ domReady(() => {
 
     // Basic validation (ensure we have necessary data)
     if (!instanceId || !selectedModel || !ajaxUrl || !nonce || !chatbotName) {
-      console.error('Easy AI Chat Embed: Missing required data for instance.', container, {
-        instanceId,
-        selectedModel,
-        chatbotName,
-        ajaxUrl,
-        nonce
-      });
+      // Keep critical error log
+      console.error('Easy AI Chat Embed: Missing required data for instance.');
+
+      // In non-production environments, log more details
+      if (true) {
+        console.error('Missing values:', {
+          instanceId,
+          selectedModel,
+          chatbotName,
+          ajaxUrl,
+          nonce
+        });
+      }
+
       // Update container HTML only if it doesn't already contain the noscript message
       if (!container.querySelector('noscript')) {
         container.innerHTML = '<p>Error: Chatbot configuration missing or incomplete.</p>';
@@ -793,8 +805,9 @@ domReady(() => {
         render(chatElement, container);
       }
     } catch (error) {
+      // Keep critical error log
       console.error('Error initializing chatbot:', error);
-      container.innerHTML = '<p>Error initializing chat interface. See console for details.</p>';
+      container.innerHTML = '<p>Error initializing chat interface. Please try again later.</p>';
     }
   });
 });
