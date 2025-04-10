@@ -57,7 +57,7 @@ function easy_ai_chat_embed_ajax_send_message() {
 	// Handle conversation history
 	$conversation_history = [];
 	if ( isset( $_POST['conversationHistory'] ) ) {
-		$conversation_history_raw = wp_unslash( $_POST['conversationHistory'] );
+		$conversation_history_raw = sanitize_textarea_field( wp_unslash( $_POST['conversationHistory'] ) );
 		$conversation_history = json_decode( $conversation_history_raw, true );
 		if ( json_last_error() !== JSON_ERROR_NONE || ! is_array( $conversation_history ) ) {
 			$conversation_history = []; // Reset if JSON is invalid or not an array

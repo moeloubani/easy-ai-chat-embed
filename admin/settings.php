@@ -173,12 +173,12 @@ function easy_ai_chat_embed_defaults_section_callback() {
 function easy_ai_chat_embed_render_api_key_field( $args ) {
     $options = get_option( 'easy_ai_chat_embed_settings' );
     $key_name = $args['key'];
-    $value = isset( $options[ $key_name ] ) ? esc_attr( $options[ $key_name ] ) : '';
+    $value = isset( $options[ $key_name ] ) ? $options[ $key_name ] : '';
     
     printf(
         '<input type="password" id="%1$s" name="easy_ai_chat_embed_settings[%1$s]" value="%2$s" class="regular-text" />',
         esc_attr( $key_name ),
-        $value
+        esc_attr( $value )
     );
     echo '<p class="description">' . esc_html__( 'Leave blank if not using this service.', 'easy-ai-chat-embed' ) . '</p>';
 }
@@ -213,9 +213,9 @@ function easy_ai_chat_embed_render_default_model_field() {
  */
 function easy_ai_chat_embed_render_default_prompt_field() {
     $options = get_option( 'easy_ai_chat_embed_settings' );
-    $value = isset( $options['default_initial_prompt'] ) ? esc_textarea( $options['default_initial_prompt'] ) : '';
+    $value = isset( $options['default_initial_prompt'] ) ? $options['default_initial_prompt'] : '';
     
-    echo '<textarea id="default_initial_prompt" name="easy_ai_chat_embed_settings[default_initial_prompt]" rows="5" cols="50" class="large-text code">' . $value . '</textarea>';
+    echo '<textarea id="default_initial_prompt" name="easy_ai_chat_embed_settings[default_initial_prompt]" rows="5" cols="50" class="large-text code">' . esc_textarea( $value ) . '</textarea>';
     echo '<p class="description">' . esc_html__( 'Optional text prepended to every user prompt to guide the AI by default.', 'easy-ai-chat-embed' ) . '</p>';
 }
 
@@ -227,11 +227,11 @@ function easy_ai_chat_embed_render_default_prompt_field() {
  */
 function easy_ai_chat_embed_render_default_chatbot_name_field() {
     $options = get_option( 'easy_ai_chat_embed_settings' );
-    $value = isset( $options['default_chatbot_name'] ) ? esc_attr( $options['default_chatbot_name'] ) : 'AIChatBot'; // Default display value
+    $value = isset( $options['default_chatbot_name'] ) ? $options['default_chatbot_name'] : 'AIChatBot'; // Default display value
     
     printf(
         '<input type="text" id="default_chatbot_name" name="easy_ai_chat_embed_settings[default_chatbot_name]" value="%s" class="regular-text" />',
-        $value
+        esc_attr( $value )
     );
     echo '<p class="description">' . esc_html__( 'The default name displayed at the top of the chat window.', 'easy-ai-chat-embed' ) . '</p>';
 }

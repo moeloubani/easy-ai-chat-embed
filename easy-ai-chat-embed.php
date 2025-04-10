@@ -1,7 +1,6 @@
 <?php
 /**
  * Plugin Name:       Easy AI Chat Embed
- * Plugin URI:        #
  * Description:       Embeds a chat interface powered by various AI models (ChatGPT, Claude, Gemini) via shortcode, block, or Elementor widget.
  * Version:           1.0.1
  * Requires at least: 6.0
