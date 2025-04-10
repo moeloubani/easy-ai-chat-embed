@@ -24,7 +24,6 @@ class Easy_AI_Chat_Embed_Elementor_Widget extends \Elementor\Widget_Base {
      * @param array $args Widget arguments.
      */
     public function __construct( $data = [], $args = null ) {
-        error_log('Easy AI Chat Embed: Widget class constructor called');
         parent::__construct( $data, $args );
     }
 
@@ -67,8 +66,6 @@ class Easy_AI_Chat_Embed_Elementor_Widget extends \Elementor\Widget_Base {
      * Register widget controls.
      */
     protected function register_controls() {
-        error_log('Easy AI Chat Embed: Registering widget controls');
-
         $this->start_controls_section(
             'content_section',
             [
