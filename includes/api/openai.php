@@ -1,6 +1,6 @@
 <?php
 /**
- * OpenAI API Integration for Easy AI Chat Embed plugin.
+ * OpenAI API Integration for Simple AI Chat Embed plugin.
  *
  * @package Easy_AI_Chat_Embed
  * @since 1.0.0
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param array  $history Conversation history.
  * @return string|WP_Error AI response or WP_Error on failure.
  */
-function easy_ai_chat_embed_call_openai( $api_key, $user_message, $initial_prompt, $selected_model, $history = [] ) {
+function simple_ai_chat_embed_call_openai( $api_key, $user_message, $initial_prompt, $selected_model, $history = [] ) {
 	$api_endpoint = 'https://api.openai.com/v1/chat/completions';
 
 	$messages = [];

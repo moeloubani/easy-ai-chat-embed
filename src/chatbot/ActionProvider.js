@@ -33,7 +33,7 @@ class ActionProvider {
 
 		// 4. Prepare request data
 		const requestData = {
-			action: 'easy_ai_chat_embed_send_message',
+			action: 'simple_ai_chat_embed_send_message',
 			_ajax_nonce: nonce,
 			message: userMessage,
 			instanceId: instanceId,

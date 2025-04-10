@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Easy AI Chat Embed 1.0.0\n"
+"Project-Id-Version: Simple AI Chat Embed 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/easy-ai-chat-embed\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Domain: easy-ai-chat-embed\n"
 
 #. Plugin Name of the plugin
-msgid "Easy AI Chat Embed"
+msgid "Simple AI Chat Embed"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -99,7 +99,7 @@ msgid "This chat interface requires JavaScript to be enabled."
 msgstr ""
 
 #: easy-ai-chat-embed.php:236
-msgid "Easy AI Chat Embed Settings"
+msgid "Simple AI Chat Embed Settings"
 msgstr ""
 
 #: easy-ai-chat-embed.php:237
@@ -208,7 +208,7 @@ msgstr ""
 
 #. translators: %1$d: number of errors, %2$s: settings page URL
 #: includes/api/handler.php:559
-msgid "Easy AI Chat Embed has encountered %1$d API errors in the last 24 hours. Please check your API keys and settings on the %2$s."
+msgid "Simple AI Chat Embed has encountered %1$d API errors in the last 24 hours. Please check your API keys and settings on the %2$s."
 msgstr ""
 
 #: includes/api/handler.php:561

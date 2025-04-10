@@ -39,7 +39,7 @@ domReady( () => {
 
 	if (!globalData) {
 		// Keep critical error log
-		console.error('Easy AI Chat Embed: Global data object missing. Assets might not have been enqueued correctly.');
+		console.error('Simple AI Chat Embed: Global data object missing. Assets might not have been enqueued correctly.');
 		// Optionally, update container innerHTML to show an error
 		chatContainers.forEach(container => {
 			if (!container.innerHTML.includes('noscript')) { // Avoid overwriting noscript tag if JS is disabled
@@ -66,7 +66,7 @@ domReady( () => {
 		// Basic validation (ensure we have necessary data)
 		if ( ! instanceId || ! selectedModel || !ajaxUrl || !nonce || !chatbotName ) {
 			// Keep critical error log
-			console.error('Easy AI Chat Embed: Missing required data for instance.');
+			console.error('Simple AI Chat Embed: Missing required data for instance.');
 			
 			// In non-production environments, log more details
 			if (process.env.NODE_ENV !== 'production') {

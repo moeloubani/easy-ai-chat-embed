@@ -1,4 +1,4 @@
-=== Easy AI Chat Embed ===
+=== Simple AI Chat Embed ===
 
 Contributors: Moe Loubani
 Author URI: https://moe.ca
@@ -14,7 +14,7 @@ Embeds an AI-powered chat interface into your WordPress site via Gutenberg block
 
 ## Description
 
-Easy AI Chat Embed provides a flexible way to add interactive AI chat functionality to your posts, pages, or widget areas. Configure API keys once, select your desired model, and embed the chat using your preferred method.
+Simple AI Chat Embed provides a flexible way to add interactive AI chat functionality to your posts, pages, or widget areas. Configure API keys once, select your desired model, and embed the chat using your preferred method.
 
 **Features:**
 
@@ -56,7 +56,7 @@ Go to **Settings > AI Chat Embed** in your WordPress admin area.
 
 Insert the following shortcode into any post, page, or text widget:
 
-`[easy_ai_chat_embed]`
+`[simple_ai_chat_embed]`
 
 This will use the default model, prompt, and chatbot name configured in the plugin settings.
 
@@ -67,7 +67,7 @@ You can override the defaults using the following attributes:
 *   `name`: Set a custom name for the chatbot.
 
 Example:
-`[easy_ai_chat_embed model="gpt-4-turbo" prompt="You are a helpful assistant." name="Support Bot"]`
+`[simple_ai_chat_embed model="gpt-4-turbo" prompt="You are a helpful assistant." name="Support Bot"]`
 
 ### Elementor Widget
 

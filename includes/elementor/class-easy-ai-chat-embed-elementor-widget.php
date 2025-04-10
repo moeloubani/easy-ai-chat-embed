@@ -128,7 +128,7 @@ class Easy_AI_Chat_Embed_Elementor_Widget extends \Elementor\Widget_Base {
         $settings = $this->get_settings_for_display();
 
         // Get global settings for defaults
-        $global_settings = get_option( 'easy_ai_chat_embed_settings', [] );
+        $global_settings = get_option( 'simple_ai_chat_embed_settings', [] );
         $default_model = $global_settings['default_model'] ?? '';
         $default_prompt = $global_settings['default_initial_prompt'] ?? '';
         $default_chatbot_name = $global_settings['default_chatbot_name'] ?? 'AIChatBot';
@@ -142,8 +142,8 @@ class Easy_AI_Chat_Embed_Elementor_Widget extends \Elementor\Widget_Base {
         $instance_id = 'eace-elementor-' . $this->get_id();
 
         // Enqueue assets directly using the new function
-        if (function_exists('easy_ai_chat_embed_enqueue_assets')) {
-            easy_ai_chat_embed_enqueue_assets();
+        if (function_exists('simple_ai_chat_embed_enqueue_assets')) {
+            simple_ai_chat_embed_enqueue_assets();
         }
 
         // Output the container div for the React app to mount

@@ -1,6 +1,6 @@
 <?php
 /**
- * Frontend rendering functions for Easy AI Chat Embed plugin.
+ * Frontend rendering functions for Simple AI Chat Embed plugin.
  *
  * @package Easy_AI_Chat_Embed
  * @since 1.0.0
@@ -22,9 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param WP_Block $block      Block instance.
  * @return string Block HTML content.
  */
-function easy_ai_chat_embed_render_block( $attributes, $content, $block ) {
+function simple_ai_chat_embed_render_block( $attributes, $content, $block ) {
     // Get global settings for fallback
-    $settings = get_option( 'easy_ai_chat_embed_settings', [] );
+    $settings = get_option( 'simple_ai_chat_embed_settings', [] );
     $default_chatbot_name = isset( $settings['default_chatbot_name'] ) && ! empty( trim( $settings['default_chatbot_name'] ) ) 
                             ? $settings['default_chatbot_name'] 
                             : 'AIChatBot';
@@ -35,7 +35,7 @@ function easy_ai_chat_embed_render_block( $attributes, $content, $block ) {
                       : $default_chatbot_name;
 
     // Enqueue required assets for this block instance
-    easy_ai_chat_embed_enqueue_assets();
+    simple_ai_chat_embed_enqueue_assets();
 
     // Return the block content wrapper
     // Ensure the wrapper has the necessary data attributes for the JS to find
@@ -58,7 +58,7 @@ function easy_ai_chat_embed_render_block( $attributes, $content, $block ) {
 }
 
 /**
- * Handler function for the [easy_ai_chat_embed] shortcode.
+ * Handler function for the [simple_ai_chat_embed] shortcode.
  *
  * Enqueues the main script & style and passes data, then returns the HTML container.
  *
@@ -66,11 +66,11 @@ function easy_ai_chat_embed_render_block( $attributes, $content, $block ) {
  * @param array $atts Shortcode attributes.
  * @return string HTML content for the shortcode.
  */
-function easy_ai_chat_embed_shortcode_handler( $atts ) {
+function simple_ai_chat_embed_shortcode_handler( $atts ) {
     $atts = array_change_key_case( (array) $atts, CASE_LOWER );
     
     // Get saved settings
-    $settings = get_option( 'easy_ai_chat_embed_settings', [] );
+    $settings = get_option( 'simple_ai_chat_embed_settings', [] );
     $default_model = isset( $settings['default_model'] ) ? $settings['default_model'] : '';
     $default_prompt = isset( $settings['default_initial_prompt'] ) ? $settings['default_initial_prompt'] : '';
     $default_chatbot_name = isset( $settings['default_chatbot_name'] ) ? $settings['default_chatbot_name'] : 'AIChatBot';
@@ -82,7 +82,7 @@ function easy_ai_chat_embed_shortcode_handler( $atts ) {
     $instance_id = uniqid( 'easy-ai-chat-embed-shortcode-' ); // Generate unique ID for shortcode instance
 
     // Enqueue required assets for this shortcode instance
-    easy_ai_chat_embed_enqueue_assets();
+    simple_ai_chat_embed_enqueue_assets();
 
     // Return the placeholder div where the React app will mount
     return sprintf(
@@ -105,7 +105,7 @@ function easy_ai_chat_embed_shortcode_handler( $atts ) {
  * @since 1.0.0
  * @return void
  */
-function easy_ai_chat_embed_enqueue_assets() {
+function simple_ai_chat_embed_enqueue_assets() {
     static $assets_loaded = false;
     
     // Only load assets once per page
@@ -115,15 +115,15 @@ function easy_ai_chat_embed_enqueue_assets() {
     
     $script_handle = 'easy-ai-chat-embed-frontend';
     
-    $script_asset_path = EASY_AI_CHAT_EMBED_PATH . 'build/index.asset.php';
-    $style_path = EASY_AI_CHAT_EMBED_PATH . 'build/index.css';
+    $script_asset_path = SIMPLE_AI_CHAT_EMBED_PATH . 'build/index.asset.php';
+    $style_path = SIMPLE_AI_CHAT_EMBED_PATH . 'build/index.css';
 
     if (file_exists($script_asset_path)) {
         $script_asset = require $script_asset_path;
         
         wp_enqueue_script(
             $script_handle,
-            EASY_AI_CHAT_EMBED_URL . 'build/index.js',
+            SIMPLE_AI_CHAT_EMBED_URL . 'build/index.js',
             array_merge($script_asset['dependencies'], array('wp-element', 'wp-i18n', 'wp-dom-ready', 'react')),
             $script_asset['version'],
             true // Load in footer.
@@ -133,7 +133,7 @@ function easy_ai_chat_embed_enqueue_assets() {
         if (file_exists($style_path)) {
             wp_enqueue_style(
                 $script_handle, // Use same handle for style for simplicity
-                EASY_AI_CHAT_EMBED_URL . 'build/index.css',
+                SIMPLE_AI_CHAT_EMBED_URL . 'build/index.css',
                 [],
                 $script_asset['version']
             );
@@ -145,7 +145,7 @@ function easy_ai_chat_embed_enqueue_assets() {
             'easyAiChatEmbedGlobalData',
             [
                 'ajaxUrl' => admin_url('admin-ajax.php'),
-                'nonce'   => wp_create_nonce('easy_ai_chat_embed_nonce'),
+                'nonce'   => wp_create_nonce('simple_ai_chat_embed_nonce'),
             ]
         );
         

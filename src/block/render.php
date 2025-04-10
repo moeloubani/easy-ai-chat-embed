@@ -13,9 +13,9 @@
  * @param WP_Block $block      Block instance.
  * @return string Returns the chat embed HTML.
  */
-function render_block_easy_ai_chat_embed( $attributes, $content, $block ) {
+function render_block_simple_ai_chat_embed( $attributes, $content, $block ) {
 	// Get global settings
-	$settings = get_option( 'easy_ai_chat_embed_settings', [] );
+	$settings = get_option( 'simple_ai_chat_embed_settings', [] );
 	$default_chatbot_name = isset( $settings['default_chatbot_name'] ) && ! empty( trim( $settings['default_chatbot_name'] ) ) 
 						? $settings['default_chatbot_name'] 
 						: 'AIChatBot';

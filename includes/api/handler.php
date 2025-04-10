@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles AJAX requests for the Easy AI Chat Embed plugin.
+ * Handles AJAX requests for the Simple AI Chat Embed plugin.
  *
  * @package Easy_AI_Chat_Embed
  * @since 1.0.0
@@ -19,17 +19,17 @@ require_once dirname( __FILE__ ) . '/google.php';
 /**
  * AJAX handler for sending messages to the AI.
  *
- * Handles the 'easy_ai_chat_embed_send_message' action.
+ * Handles the 'simple_ai_chat_embed_send_message' action.
  *
  * @since 1.0.0
  * @return void
  */
-function easy_ai_chat_embed_ajax_send_message() {
+function simple_ai_chat_embed_ajax_send_message() {
 	// 1. Verify the nonce with die on failure
-	check_ajax_referer( 'easy_ai_chat_embed_nonce', '_ajax_nonce', true );
+	check_ajax_referer( 'simple_ai_chat_embed_nonce', '_ajax_nonce', true );
 
 	// 2. Retrieve saved settings
-	$settings = get_option( 'easy_ai_chat_embed_settings', [] );
+	$settings = get_option( 'simple_ai_chat_embed_settings', [] );
 
 	// 3. Sanitize incoming data
 	$user_message    = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
@@ -121,11 +121,11 @@ function easy_ai_chat_embed_ajax_send_message() {
 		$error = null;
 
 		if ( strpos( $selected_model, 'gpt-' ) === 0 ) {
-			$ai_response = easy_ai_chat_embed_call_openai( $api_key, $user_message, $initial_prompt, $selected_model, $conversation_history );
+			$ai_response = simple_ai_chat_embed_call_openai( $api_key, $user_message, $initial_prompt, $selected_model, $conversation_history );
 		} elseif ( strpos( $selected_model, 'claude-' ) === 0 ) {
-			$ai_response = easy_ai_chat_embed_call_anthropic( $api_key, $user_message, $initial_prompt, $selected_model, $conversation_history );
+			$ai_response = simple_ai_chat_embed_call_anthropic( $api_key, $user_message, $initial_prompt, $selected_model, $conversation_history );
 		} elseif ( strpos( $selected_model, 'gemini-' ) === 0 ) {
-			$ai_response = easy_ai_chat_embed_call_google( $api_key, $user_message, $initial_prompt, $selected_model, $conversation_history );
+			$ai_response = simple_ai_chat_embed_call_google( $api_key, $user_message, $initial_prompt, $selected_model, $conversation_history );
 		} else {
 			$error = new WP_Error(
 				'invalid_model', 
@@ -165,6 +165,6 @@ function easy_ai_chat_embed_ajax_send_message() {
 }
 
 // Register AJAX actions for logged-in users ONLY
-add_action( 'wp_ajax_easy_ai_chat_embed_send_message', 'easy_ai_chat_embed_ajax_send_message' );
+add_action( 'wp_ajax_simple_ai_chat_embed_send_message', 'simple_ai_chat_embed_ajax_send_message' );
 // Also enable for non-logged-in users (front-end visitors)
-add_action( 'wp_ajax_nopriv_easy_ai_chat_embed_send_message', 'easy_ai_chat_embed_ajax_send_message' );
+add_action( 'wp_ajax_nopriv_simple_ai_chat_embed_send_message', 'simple_ai_chat_embed_ajax_send_message' );

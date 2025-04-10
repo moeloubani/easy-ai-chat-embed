@@ -1,7 +1,7 @@
 {
   "name": "easy-ai-chat-embed",
   "version": "1.0.1",
-  "description": "JS dependencies for Easy AI Chat Embed plugin.",
+  "description": "JS dependencies for Simple AI Chat Embed plugin.",
   "main": "build/index.js",
   "scripts": {
     "clean": "rm -rf build",
