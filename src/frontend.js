@@ -21,21 +21,21 @@ import ActionProvider from './chatbot/ActionProvider';
 import './frontend.scss'; // For custom frontend styles
 
 // Create global storage for chatbot instances
-window.easyAiChatInstances = window.easyAiChatInstances || {};
+window.simpleAiChatInstances = window.simpleAiChatInstances || {};
 
 /**
  * Find all chat embed containers and mount the chatbot component.
  */
-domReady( () => {
+export const initializeChatEmbeds = () => {
 	const chatContainers = document.querySelectorAll(
-		'.easy-ai-chat-embed-instance' // Target all instances by the common class
+		'.simple-ai-chat-embed-instance' // Target all instances by the common class
 	);
 
 	// Check if React 18's createRoot is available (WP 6.2+)
 	const useCreateRoot = typeof createRoot === 'function';
 
 	// Get global data (should be available if script was enqueued)
-	const globalData = window.easyAiChatEmbedGlobalData;
+	const globalData = window.simpleAiChatEmbedGlobalData;
 
 	if (!globalData) {
 		// Keep critical error log
@@ -43,11 +43,13 @@ domReady( () => {
 		// Optionally, update container innerHTML to show an error
 		chatContainers.forEach(container => {
 			if (!container.innerHTML.includes('noscript')) { // Avoid overwriting noscript tag if JS is disabled
-				 container.innerHTML = '<p>Error: Chatbot global data missing.</p>';
+				container.innerHTML = '<p>Error: Chatbot global data missing.</p>';
 			}
 		});
 		return; // Stop execution if global data is missing
 	}
+
+	console.log('chatContainers', chatContainers);
 
 	chatContainers.forEach( ( container ) => {
 		// Get all instance-specific data directly from data attributes
@@ -67,21 +69,21 @@ domReady( () => {
 		if ( ! instanceId || ! selectedModel || !ajaxUrl || !nonce || !chatbotName ) {
 			// Keep critical error log
 			console.error('Simple AI Chat Embed: Missing required data for instance.');
-			
+
 			// In non-production environments, log more details
 			if (process.env.NODE_ENV !== 'production') {
 				console.error('Missing values:', { instanceId, selectedModel, chatbotName, ajaxUrl, nonce });
 			}
-			
+
 			// Update container HTML only if it doesn't already contain the noscript message
 			if (!container.querySelector('noscript')) {
-				 container.innerHTML = '<p>Error: Chatbot configuration missing or incomplete.</p>';
+				container.innerHTML = '<p>Error: Chatbot configuration missing or incomplete.</p>';
 			}
 			return; // Skip this container
 		}
 
 		// Store essential data in global window object
-		window.easyAiChatInstances[instanceId] = {
+		window.simpleAiChatInstances[instanceId] = {
 			ajaxUrl,
 			nonce,
 			instanceId,
@@ -126,7 +128,7 @@ domReady( () => {
 			// Create a wrapper div to target
 			const chatElement = wp.element.createElement(
 				'div',
-				{ className: 'easy-ai-chat-widget-container' }, // Outer wrapper for potential styling
+				{ className: 'simple-ai-chat-widget-container' }, // Outer wrapper for potential styling
 				wp.element.createElement(Chatbot, chatbotProps)
 			);
 
@@ -142,4 +144,8 @@ domReady( () => {
 			container.innerHTML = '<p>Error initializing chat interface. Please try again later.</p>';
 		}
 	} );
-} ); 
+}
+
+domReady( () => {
+	initializeChatEmbeds();
+} );

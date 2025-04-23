@@ -2,7 +2,7 @@
 /**
  * Frontend rendering functions for Simple AI Chat Embed plugin.
  *
- * @package Easy_AI_Chat_Embed
+ * @package Simple_AI_Chat_Embed
  * @since 1.0.0
  */
 
@@ -42,18 +42,19 @@ function simple_ai_chat_embed_render_block( $attributes, $content, $block ) {
     // Add the common instance class
     $wrapper_attributes = get_block_wrapper_attributes(
         [
-            'class' => 'easy-ai-chat-embed-instance', // Ensure common class
+            'class' => 'simple-ai-chat-embed-instance', // Ensure common class
             'data-instance-id' => esc_attr( $attributes['instanceId'] ),
             'data-selected-model' => esc_attr( $attributes['selectedModel'] ),
             'data-initial-prompt' => esc_attr( $attributes['initialPrompt'] ),
             'data-chatbot-name' => esc_attr( $chatbot_name ),
-            'data-is-block' => 'true' // Add flag for JS if needed
+            'data-is-block' => 'true'
         ]
     );
+
     return sprintf(
         '<div %s><noscript>%s</noscript></div>',
         $wrapper_attributes,
-        esc_html__( 'This chat interface requires JavaScript to be enabled.', 'easy-ai-chat-embed' )
+        esc_html__( 'This chat interface requires JavaScript to be enabled.', 'simple-ai-chat-embed' )
     );
 }
 
@@ -79,19 +80,18 @@ function simple_ai_chat_embed_shortcode_handler( $atts ) {
     $selected_model = isset( $atts['model'] ) ? $atts['model'] : $default_model;
     $initial_prompt = isset( $atts['prompt'] ) ? $atts['prompt'] : $default_prompt;
     $chatbot_name = isset( $atts['name'] ) ? $atts['name'] : $default_chatbot_name; // Use 'name' attribute for shortcode
-    $instance_id = uniqid( 'easy-ai-chat-embed-shortcode-' ); // Generate unique ID for shortcode instance
+    $instance_id = uniqid( 'simple-ai-chat-embed-shortcode-' ); // Generate unique ID for shortcode instance
 
     // Enqueue required assets for this shortcode instance
     simple_ai_chat_embed_enqueue_assets();
 
     // Return the placeholder div where the React app will mount
     return sprintf(
-        '<div id="easy-ai-chat-embed-%1$s" class="easy-ai-chat-embed-instance" data-is-shortcode="true" data-instance-id="%1$s" data-selected-model="%2$s" data-initial-prompt="%3$s" data-chatbot-name="%4$s"><noscript>%5$s</noscript></div>',
+        '<div id="simple-ai-chat-embed-%1$s" class="simple-ai-chat-embed-instance" data-is-shortcode="true" data-instance-id="%1$s" data-selected-model="%2$s" data-initial-prompt="%3$s" data-chatbot-name="%4$s"></div>',
         esc_attr( $instance_id ),
         esc_attr( $selected_model ),
         esc_attr( $initial_prompt ),
         esc_attr( $chatbot_name ),
-        esc_html__( 'This chat interface requires JavaScript to be enabled.', 'easy-ai-chat-embed' )
     );
 }
 
@@ -107,20 +107,20 @@ function simple_ai_chat_embed_shortcode_handler( $atts ) {
  */
 function simple_ai_chat_embed_enqueue_assets() {
     static $assets_loaded = false;
-    
+
     // Only load assets once per page
     if ($assets_loaded) {
         return;
     }
-    
-    $script_handle = 'easy-ai-chat-embed-frontend';
+
+    $script_handle = 'simple-ai-chat-embed-frontend';
     
     $script_asset_path = SIMPLE_AI_CHAT_EMBED_PATH . 'build/index.asset.php';
     $style_path = SIMPLE_AI_CHAT_EMBED_PATH . 'build/index.css';
 
     if (file_exists($script_asset_path)) {
         $script_asset = require $script_asset_path;
-        
+
         wp_enqueue_script(
             $script_handle,
             SIMPLE_AI_CHAT_EMBED_URL . 'build/index.js',
@@ -139,16 +139,25 @@ function simple_ai_chat_embed_enqueue_assets() {
             );
         }
 
+        $data_to_pass = array(
+            'ajaxUrl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('simple_ai_chat_embed_nonce'),
+        );
+
         // Localize script with common data
         wp_localize_script(
             $script_handle,
-            'easyAiChatEmbedGlobalData',
-            [
-                'ajaxUrl' => admin_url('admin-ajax.php'),
-                'nonce'   => wp_create_nonce('simple_ai_chat_embed_nonce'),
-            ]
+            'simpleAiChatEmbedGlobalData',
+            $data_to_pass
         );
-        
+
+        // Localize script with common data for the Gutenberg editor
+        wp_localize_script(
+            'simple-ai-chat-embed-chat-embed-editor-script',
+            'simpleAiChatEmbedGlobalData',
+            $data_to_pass
+        );
+
         // Mark assets as loaded to prevent duplicate loading
         $assets_loaded = true;
     }

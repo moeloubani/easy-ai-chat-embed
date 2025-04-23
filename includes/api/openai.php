@@ -2,7 +2,7 @@
 /**
  * OpenAI API Integration for Simple AI Chat Embed plugin.
  *
- * @package Easy_AI_Chat_Embed
+ * @package Simple_AI_Chat_Embed
  * @since 1.0.0
  */
 
@@ -56,7 +56,7 @@ function simple_ai_chat_embed_call_openai( $api_key, $user_message, $initial_pro
 	if ( json_last_error() !== JSON_ERROR_NONE ) {
 		return new WP_Error( 
 			'json_encode_error', 
-			__( 'Failed to encode request data for OpenAI.', 'easy-ai-chat-embed' ) . ' ' . json_last_error_msg() 
+			__( 'Failed to encode request data for OpenAI.', 'simple-ai-chat-embed' ) . ' ' . json_last_error_msg() 
 		);
 	}
 
@@ -75,7 +75,7 @@ function simple_ai_chat_embed_call_openai( $api_key, $user_message, $initial_pro
 	if ( is_wp_error( $response ) ) {
 		return new WP_Error( 
 			'openai_request_failed', 
-			__( 'Failed to connect to OpenAI API:', 'easy-ai-chat-embed' ) . ' ' . $response->get_error_message() 
+			__( 'Failed to connect to OpenAI API:', 'simple-ai-chat-embed' ) . ' ' . $response->get_error_message() 
 		);
 	}
 
@@ -84,11 +84,11 @@ function simple_ai_chat_embed_call_openai( $api_key, $user_message, $initial_pro
 	$result = json_decode( $response_body, true );
 
 	if ( $response_code !== 200 ) {
-		$error_message = isset( $result['error']['message'] ) ? $result['error']['message'] : __( 'Unknown error occurred.', 'easy-ai-chat-embed' );
+		$error_message = isset( $result['error']['message'] ) ? $result['error']['message'] : __( 'Unknown error occurred.', 'simple-ai-chat-embed' );
 		return new WP_Error(
 			'openai_api_error',
 			/* translators: 1: HTTP response code (e.g., 400), 2: Error message from API. */
-			sprintf( __( 'OpenAI API Error (%1$d): %2$s', 'easy-ai-chat-embed' ), $response_code, $error_message ),
+			sprintf( __( 'OpenAI API Error (%1$d): %2$s', 'simple-ai-chat-embed' ), $response_code, $error_message ),
 			[ 'status' => $response_code ]
 		);
 	}
@@ -96,13 +96,13 @@ function simple_ai_chat_embed_call_openai( $api_key, $user_message, $initial_pro
 	if ( json_last_error() !== JSON_ERROR_NONE ) {
 		return new WP_Error( 
 			'openai_json_decode_error', 
-			__( 'Failed to decode OpenAI response.', 'easy-ai-chat-embed' ) . ' ' . json_last_error_msg() 
+			__( 'Failed to decode OpenAI response.', 'simple-ai-chat-embed' ) . ' ' . json_last_error_msg() 
 		);
 	}
 
 	if ( ! empty( $result['choices'][0]['message']['content'] ) ) {
 		return trim( $result['choices'][0]['message']['content'] );
 	} else {
-		return new WP_Error( 'openai_empty_response', __( 'Received an empty response from OpenAI.', 'easy-ai-chat-embed' ) );
+		return new WP_Error( 'openai_empty_response', __( 'Received an empty response from OpenAI.', 'simple-ai-chat-embed' ) );
 	}
 } 

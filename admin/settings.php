@@ -2,7 +2,7 @@
 /**
  * Admin Settings Page
  *
- * @package Easy_AI_Chat_Embed
+ * @package Simple_AI_Chat_Embed
  * @since 1.0.0
  */
 
@@ -36,33 +36,33 @@ function simple_ai_chat_embed_register_settings() {
     // Add settings section
     add_settings_section(
         'simple_ai_chat_embed_api_keys_section',
-        __( 'API Key Settings', 'easy-ai-chat-embed' ),
+        __( 'API Key Settings', 'simple-ai-chat-embed' ),
         'simple_ai_chat_embed_api_keys_section_callback',
-        'easy-ai-chat-embed-settings-page' // Page slug
+        'simple-ai-chat-embed-settings-page' // Page slug
     );
 
     // Add API Key fields
     add_settings_field(
         'openai_api_key',
-        __( 'OpenAI API Key', 'easy-ai-chat-embed' ),
+        __( 'OpenAI API Key', 'simple-ai-chat-embed' ),
         'simple_ai_chat_embed_render_api_key_field',
-        'easy-ai-chat-embed-settings-page',
+        'simple-ai-chat-embed-settings-page',
         'simple_ai_chat_embed_api_keys_section',
         [ 'key' => 'openai_api_key', 'label_for' => 'openai_api_key' ]
     );
     add_settings_field(
         'anthropic_api_key',
-        __( 'Anthropic API Key', 'easy-ai-chat-embed' ),
+        __( 'Anthropic API Key', 'simple-ai-chat-embed' ),
         'simple_ai_chat_embed_render_api_key_field',
-        'easy-ai-chat-embed-settings-page',
+        'simple-ai-chat-embed-settings-page',
         'simple_ai_chat_embed_api_keys_section',
         [ 'key' => 'anthropic_api_key', 'label_for' => 'anthropic_api_key' ]
     );
     add_settings_field(
         'google_api_key',
-        __( 'Google AI API Key', 'easy-ai-chat-embed' ),
+        __( 'Google AI API Key', 'simple-ai-chat-embed' ),
         'simple_ai_chat_embed_render_api_key_field',
-        'easy-ai-chat-embed-settings-page',
+        'simple-ai-chat-embed-settings-page',
         'simple_ai_chat_embed_api_keys_section',
         [ 'key' => 'google_api_key', 'label_for' => 'google_api_key' ]
     );
@@ -70,17 +70,17 @@ function simple_ai_chat_embed_register_settings() {
     // Add Default Settings Section
     add_settings_section(
         'simple_ai_chat_embed_defaults_section',
-        __( 'Default Chat Settings', 'easy-ai-chat-embed' ),
+        __( 'Default Chat Settings', 'simple-ai-chat-embed' ),
         'simple_ai_chat_embed_defaults_section_callback',
-        'easy-ai-chat-embed-settings-page'
+        'simple-ai-chat-embed-settings-page'
     );
 
     // Add Default Model field
     add_settings_field(
         'default_model',
-        __( 'Default AI Model', 'easy-ai-chat-embed' ),
+        __( 'Default AI Model', 'simple-ai-chat-embed' ),
         'simple_ai_chat_embed_render_default_model_field',
-        'easy-ai-chat-embed-settings-page',
+        'simple-ai-chat-embed-settings-page',
         'simple_ai_chat_embed_defaults_section',
         [ 'label_for' => 'default_model' ]
     );
@@ -88,9 +88,9 @@ function simple_ai_chat_embed_register_settings() {
     // Add Default Initial Prompt field
     add_settings_field(
         'default_initial_prompt',
-        __( 'Default Initial Prompt', 'easy-ai-chat-embed' ),
+        __( 'Default Initial Prompt', 'simple-ai-chat-embed' ),
         'simple_ai_chat_embed_render_default_prompt_field',
-        'easy-ai-chat-embed-settings-page',
+        'simple-ai-chat-embed-settings-page',
         'simple_ai_chat_embed_defaults_section',
         [ 'label_for' => 'default_initial_prompt' ]
     );
@@ -98,9 +98,9 @@ function simple_ai_chat_embed_register_settings() {
     // Add Default Chatbot Name field
     add_settings_field(
         'default_chatbot_name',
-        __( 'Default Chatbot Name', 'easy-ai-chat-embed' ),
+        __( 'Default Chatbot Name', 'simple-ai-chat-embed' ),
         'simple_ai_chat_embed_render_default_chatbot_name_field',
-        'easy-ai-chat-embed-settings-page',
+        'simple-ai-chat-embed-settings-page',
         'simple_ai_chat_embed_defaults_section',
         [ 'label_for' => 'default_chatbot_name' ]
     );
@@ -150,7 +150,7 @@ function simple_ai_chat_embed_sanitize_settings( $input ) {
  * @return void
  */
 function simple_ai_chat_embed_api_keys_section_callback() {
-    echo '<p>' . esc_html__( 'Enter the API keys for the AI services you want to enable.', 'easy-ai-chat-embed' ) . '</p>';
+    echo '<p>' . esc_html__( 'Enter the API keys for the AI services you want to enable.', 'simple-ai-chat-embed' ) . '</p>';
 }
 
 /**
@@ -160,7 +160,7 @@ function simple_ai_chat_embed_api_keys_section_callback() {
  * @return void
  */
 function simple_ai_chat_embed_defaults_section_callback() {
-    echo '<p>' . esc_html__( 'Set the default model and initial prompt for new chat instances (can be overridden per instance).', 'easy-ai-chat-embed' ) . '</p>';
+    echo '<p>' . esc_html__( 'Set the default model and initial prompt for new chat instances (can be overridden per instance).', 'simple-ai-chat-embed' ) . '</p>';
 }
 
 /**
@@ -180,7 +180,7 @@ function simple_ai_chat_embed_render_api_key_field( $args ) {
         esc_attr( $key_name ),
         esc_attr( $value )
     );
-    echo '<p class="description">' . esc_html__( 'Leave blank if not using this service.', 'easy-ai-chat-embed' ) . '</p>';
+    echo '<p class="description">' . esc_html__( 'Leave blank if not using this service.', 'simple-ai-chat-embed' ) . '</p>';
 }
 
 /**
@@ -216,7 +216,7 @@ function simple_ai_chat_embed_render_default_prompt_field() {
     $value = isset( $options['default_initial_prompt'] ) ? $options['default_initial_prompt'] : '';
     
     echo '<textarea id="default_initial_prompt" name="simple_ai_chat_embed_settings[default_initial_prompt]" rows="5" cols="50" class="large-text code">' . esc_textarea( $value ) . '</textarea>';
-    echo '<p class="description">' . esc_html__( 'Optional text prepended to every user prompt to guide the AI by default.', 'easy-ai-chat-embed' ) . '</p>';
+    echo '<p class="description">' . esc_html__( 'Optional text prepended to every user prompt to guide the AI by default.', 'simple-ai-chat-embed' ) . '</p>';
 }
 
 /**
@@ -233,7 +233,7 @@ function simple_ai_chat_embed_render_default_chatbot_name_field() {
         '<input type="text" id="default_chatbot_name" name="simple_ai_chat_embed_settings[default_chatbot_name]" value="%s" class="regular-text" />',
         esc_attr( $value )
     );
-    echo '<p class="description">' . esc_html__( 'The default name displayed at the top of the chat window.', 'easy-ai-chat-embed' ) . '</p>';
+    echo '<p class="description">' . esc_html__( 'The default name displayed at the top of the chat window.', 'simple-ai-chat-embed' ) . '</p>';
 }
 
 /**
@@ -251,9 +251,9 @@ function simple_ai_chat_embed_render_settings_page() {
             // Output security fields for the registered setting group
             settings_fields( 'simple_ai_chat_embed_options_group' );
             // Output the sections and fields for the specified page slug
-            do_settings_sections( 'easy-ai-chat-embed-settings-page' );
+            do_settings_sections( 'simple-ai-chat-embed-settings-page' );
             // Output submit button
-            submit_button( __( 'Save Settings', 'easy-ai-chat-embed' ) );
+            submit_button( __( 'Save Settings', 'simple-ai-chat-embed' ) );
             ?>
         </form>
     </div>

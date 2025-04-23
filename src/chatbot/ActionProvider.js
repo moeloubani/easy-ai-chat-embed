@@ -60,14 +60,14 @@ class ActionProvider {
 		}
 		
 		// Get instance data from global object
-		const instances = window.easyAiChatInstances || {};
+		const instances = window.simpleAiChatInstances || {};
 		
 		// No instances found
 		if (Object.keys(instances).length === 0) {
 			// Keep this error log as it's critical for debugging
 			console.error('Error: No chat instances found in global storage');
 			const errorMessage = this.createChatBotMessage(
-				__("I'm unable to process your request at this time. Please try again later.", 'easy-ai-chat-embed')
+				__("I'm unable to process your request at this time. Please try again later.", 'simple-ai-chat-embed')
 			);
 			this.addMessageToState(errorMessage);
 			return null;
@@ -144,7 +144,7 @@ class ActionProvider {
 			console.error('API Error:', result.data?.message || 'Unknown error');
 			// Show generic message to user
 			const botError = this.createChatBotMessage(
-				__('Sorry, I encountered a problem processing your request. Please try again later.', 'easy-ai-chat-embed')
+				__('Sorry, I encountered a problem processing your request. Please try again later.', 'simple-ai-chat-embed')
 			);
 			this.addMessageToState(botError);
 		}
@@ -158,7 +158,7 @@ class ActionProvider {
 		this.removeLastMessage();
 		// Show generic message to users
 		const botError = this.createChatBotMessage(
-			__('Sorry, I was unable to connect to the AI service. Please try again later.', 'easy-ai-chat-embed')
+			__('Sorry, I was unable to connect to the AI service. Please try again later.', 'simple-ai-chat-embed')
 		);
 		this.addMessageToState(botError);
 	};

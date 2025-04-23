@@ -1,5 +1,5 @@
 {
-  "name": "easy-ai-chat-embed",
+  "name": "simple-ai-chat-embed",
   "version": "1.0.1",
   "description": "JS dependencies for Simple AI Chat Embed plugin.",
   "main": "build/index.js",
@@ -22,7 +22,7 @@
     "chat",
     "ai"
   ],
-  "author": "Your Name or Company",
+  "author": "Moe Loubani",
   "license": "GPL-2.0-or-later",
   "devDependencies": {
     "@babel/preset-env": "^7.23.3",
@@ -32,6 +32,7 @@
     "copy-webpack-plugin": "^11.0.0"
   },
   "dependencies": {
+    "@wordpress/api-fetch": "^7.22.0",
     "react-chatbot-kit": "^2.2.2"
   }
 }

@@ -2,7 +2,7 @@
 /**
  * Google AI API Integration for Simple AI Chat Embed plugin.
  *
- * @package Easy_AI_Chat_Embed
+ * @package Simple_AI_Chat_Embed
  * @since 1.0.0
  */
 
@@ -70,7 +70,7 @@ function simple_ai_chat_embed_call_google( $api_key, $user_message, $initial_pro
 	if ( json_last_error() !== JSON_ERROR_NONE ) {
 		return new WP_Error( 
 			'json_encode_error', 
-			__( 'Failed to encode request data for Google AI.', 'easy-ai-chat-embed' ) . ' ' . json_last_error_msg() 
+			__( 'Failed to encode request data for Google AI.', 'simple-ai-chat-embed' ) . ' ' . json_last_error_msg() 
 		);
 	}
 
@@ -88,7 +88,7 @@ function simple_ai_chat_embed_call_google( $api_key, $user_message, $initial_pro
 	if ( is_wp_error( $response ) ) {
 		return new WP_Error( 
 			'google_request_failed', 
-			__( 'Failed to connect to Google AI API:', 'easy-ai-chat-embed' ) . ' ' . $response->get_error_message() 
+			__( 'Failed to connect to Google AI API:', 'simple-ai-chat-embed' ) . ' ' . $response->get_error_message() 
 		);
 	}
 
@@ -97,11 +97,11 @@ function simple_ai_chat_embed_call_google( $api_key, $user_message, $initial_pro
 	$result = json_decode( $response_body, true );
 
 	if ( $response_code !== 200 ) {
-		$error_message = isset( $result['error']['message'] ) ? $result['error']['message'] : __( 'Unknown error occurred.', 'easy-ai-chat-embed' );
+		$error_message = isset( $result['error']['message'] ) ? $result['error']['message'] : __( 'Unknown error occurred.', 'simple-ai-chat-embed' );
 		return new WP_Error(
 			'google_api_error',
 			/* translators: 1: HTTP response code (e.g., 400), 2: Error message from API. */
-			sprintf( __( 'Google AI API Error (%1$d): %2$s', 'easy-ai-chat-embed' ), $response_code, $error_message ),
+			sprintf( __( 'Google AI API Error (%1$d): %2$s', 'simple-ai-chat-embed' ), $response_code, $error_message ),
 			[ 'status' => $response_code ]
 		);
 	}
@@ -109,7 +109,7 @@ function simple_ai_chat_embed_call_google( $api_key, $user_message, $initial_pro
 	if ( json_last_error() !== JSON_ERROR_NONE ) {
 		return new WP_Error( 
 			'google_json_decode_error', 
-			__( 'Failed to decode Google AI response.', 'easy-ai-chat-embed' ) . ' ' . json_last_error_msg() 
+			__( 'Failed to decode Google AI response.', 'simple-ai-chat-embed' ) . ' ' . json_last_error_msg() 
 		);
 	}
 
@@ -121,12 +121,12 @@ function simple_ai_chat_embed_call_google( $api_key, $user_message, $initial_pro
 		return new WP_Error(
 			'google_blocked_response',
 			// translators: %s: Error message from the Google API.
-			sprintf( __( 'Google AI response generation stopped due to: %s', 'easy-ai-chat-embed' ), $result['candidates'][0]['finishReason'] )
+			sprintf( __( 'Google AI response generation stopped due to: %s', 'simple-ai-chat-embed' ), $result['candidates'][0]['finishReason'] )
 		);
 	} else {
 		return new WP_Error( 
 			'google_empty_response', 
-			__( 'Received an empty or unexpected response from Google AI.', 'easy-ai-chat-embed' ) 
+			__( 'Received an empty or unexpected response from Google AI.', 'simple-ai-chat-embed' ) 
 		);
 	}
 } 

@@ -4,16 +4,19 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, TextareaControl, TextControl } from '@wordpress/components';
+import ServerSideRender from '@wordpress/server-side-render';
 import { useEffect } from '@wordpress/element';
+import ChatbotWrapper from '../chatbot/ChatbotWrapper';
 
 /**
  * Internal dependencies
  */
-import './editor.scss'; // We might add editor-specific styles later
+import './editor.scss';
+import {initializeChatEmbeds} from "../frontend"; // We might add editor-specific styles later
 
 // Define the available models
 const modelOptions = [
-	{ label: __( 'Select a Model', 'easy-ai-chat-embed' ), value: '' },
+	{ label: __( 'Select a Model', 'simple-ai-chat-embed' ), value: '' },
 	{ label: 'ChatGPT 4.0', value: 'gpt-4o-mini' },
 	{ label: 'Claude Sonnet 3.7', value: 'claude-3-7-sonnet-20250219' },
 	{ label: 'Google Gemini', value: 'gemini-2.0-flash-lite' },
@@ -45,12 +48,18 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		}
 	}, [ clientId, instanceId, setAttributes ] );
 
+	useEffect(() => {
+		wp.domReady(() => {
+			initializeChatEmbeds();
+		})
+	}, [attributes]);
+
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
-				<PanelBody title={ __( 'AI Model Settings', 'easy-ai-chat-embed' ) }>
+				<PanelBody title={ __( 'AI Model Settings', 'simple-ai-chat-embed' ) }>
 					<SelectControl
-						label={ __( 'Select AI Model', 'easy-ai-chat-embed' ) }
+						label={ __( 'Select AI Model', 'simple-ai-chat-embed' ) }
 						value={ selectedModel }
 						options={ modelOptions }
 						onChange={ ( newModel ) =>
@@ -58,16 +67,16 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<TextareaControl
-						label={ __( 'Initial System Prompt', 'easy-ai-chat-embed' ) }
-						help={ __( 'Optional text prepended to every user prompt to guide the AI.', 'easy-ai-chat-embed' ) }
+						label={ __( 'Initial System Prompt', 'simple-ai-chat-embed' ) }
+						help={ __( 'Optional text prepended to every user prompt to guide the AI.', 'simple-ai-chat-embed' ) }
 						value={ initialPrompt }
 						onChange={ ( newPrompt ) =>
 							setAttributes( { initialPrompt: newPrompt } )
 						}
 					/>
 					<TextControl
-						label={ __( 'Chatbot Name', 'easy-ai-chat-embed' ) }
-						help={ __( 'Optional name for this specific chat instance. Leave blank to use the default.', 'easy-ai-chat-embed' ) }
+						label={ __( 'Chatbot Name', 'simple-ai-chat-embed' ) }
+						help={ __( 'Optional name for this specific chat instance. Leave blank to use the default.', 'simple-ai-chat-embed' ) }
 						value={ chatbotName }
 						onChange={ ( newName ) =>
 							setAttributes( { chatbotName: newName } )
@@ -75,10 +84,17 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<p>
-				{ __( 'AI Chat Embed Placeholder - Configure in sidebar.', 'easy-ai-chat-embed' ) }
-			</p>
-			{ /* We will add the actual chat preview here later */ }
+			<ChatbotWrapper
+				instanceId={attributes.instanceId}
+				initialPrompt={attributes.initialPrompt}
+				selectedModel={attributes.selectedModel}
+				chatbotName={attributes.chatbotName}
+				ajaxUrl=""
+				nonce=""
+				initialState={{}}
+				isBlock={true}
+				isEditor={true}
+			/>
 		</div>
 	);
 } 

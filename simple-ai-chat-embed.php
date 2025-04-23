@@ -9,10 +9,10 @@
  * Author URI:        https://moe.ca
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       easy-ai-chat-embed
+ * Text Domain:       simple-ai-chat-embed
  * Domain Path:       /languages
  *
- * @package Easy_AI_Chat_Embed
+ * @package Simple_AI_Chat_Embed
  */
 
 // Exit if accessed directly.
@@ -24,12 +24,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'SIMPLE_AI_CHAT_EMBED_VERSION', '1.0.1' );
 define( 'SIMPLE_AI_CHAT_EMBED_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SIMPLE_AI_CHAT_EMBED_URL', plugin_dir_url( __FILE__ ) );
-
-// Load textdomain
-function simple_ai_chat_embed_load_textdomain() {
-	load_plugin_textdomain( 'easy-ai-chat-embed', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-}
-add_action( 'plugins_loaded', 'simple_ai_chat_embed_load_textdomain' );
 
 // Include necessary files
 require_once SIMPLE_AI_CHAT_EMBED_PATH . 'includes/api/handler.php';
@@ -63,10 +57,7 @@ add_action( 'init', 'simple_ai_chat_embed_maybe_load_elementor', 20 );
 function simple_ai_chat_embed_register_block() {
 	// Register the block type using metadata from block.json
 	register_block_type(
-		SIMPLE_AI_CHAT_EMBED_PATH . 'build',
-		[
-			'render_callback' => 'simple_ai_chat_embed_render_block'
-		]
+		SIMPLE_AI_CHAT_EMBED_PATH . 'build'
 	);
 }
 add_action( 'init', 'simple_ai_chat_embed_register_block' );
@@ -90,10 +81,10 @@ add_action( 'init', 'simple_ai_chat_embed_register_shortcode' );
  */
 function simple_ai_chat_embed_add_admin_menu() {
     add_options_page(
-        __( 'Simple AI Chat Embed Settings', 'easy-ai-chat-embed' ), // Page Title
-        __( 'AI Chat Embed', 'easy-ai-chat-embed' ),           // Menu Title
+        __( 'Simple AI Chat Embed Settings', 'simple-ai-chat-embed' ), // Page Title
+        __( 'AI Chat Embed', 'simple-ai-chat-embed' ),           // Menu Title
         'manage_options',                                      // Capability required
-        'easy-ai-chat-embed-settings-page',                    // Menu Slug (matches settings page slug)
+        'simple-ai-chat-embed-settings-page',                    // Menu Slug (matches settings page slug)
         'simple_ai_chat_embed_render_settings_page'              // Function to render the page content
     );
 }

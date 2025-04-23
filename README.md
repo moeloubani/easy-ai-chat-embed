@@ -1,7 +1,6 @@
 === Simple AI Chat Embed ===
 
-Contributors: Moe Loubani
-Author URI: https://moe.ca
+Contributors: moeloubani1
 Tags: chatbot, anthropic, gemini, chatgpt
 Requires at least: 6.0
 Tested up to: 6.8
@@ -26,7 +25,7 @@ Simple AI Chat Embed provides a flexible way to add interactive AI chat function
 
 ## Installation
 
-1.  Upload the `easy-ai-chat-embed` folder to the `/wp-content/plugins/` directory.
+1.  Upload the `simple-ai-chat-embed` folder to the `/wp-content/plugins/` directory.
 2.  Activate the plugin through the 'Plugins' menu in WordPress.
 3.  Navigate to **Settings > AI Chat Embed** to configure the API keys and default settings.
 
@@ -92,3 +91,13 @@ Where do I get an API key for this plugin?
 ### 1.0.0
 *   Initial release.
 *   Features: Gutenberg block, shortcode, Elementor widget, settings page, OpenAI/Anthropic/Google API integration.
+
+### External Services Notice
+This plugin uses external services (OpenAI, Anthropic, Google) to provide AI chat functionality. Data that may be sent
+to these services includes user messages, chat history, and any other information necessary for the AI to generate responses.
+
+You can find more information about these services and their privacy and usage policies on their respective websites:
+
+*   [OpenAI](https://openai.com/policies/row-privacy-policy/)
+*   [Anthropic](https://privacy.anthropic.com/en/articles/9190861-terms-of-service-updates)
+*   [Google](https://support.google.com/gemini/answer/13594961?hl=en#privacy_notice)

@@ -2,7 +2,7 @@
 /**
  * Anthropic API Integration for Simple AI Chat Embed plugin.
  *
- * @package Easy_AI_Chat_Embed
+ * @package Simple_AI_Chat_Embed
  * @since 1.0.0
  */
 
@@ -56,7 +56,7 @@ function simple_ai_chat_embed_call_anthropic( $api_key, $user_message, $initial_
 	if ( json_last_error() !== JSON_ERROR_NONE ) {
 		return new WP_Error( 
 			'json_encode_error', 
-			__( 'Failed to encode request data for Anthropic.', 'easy-ai-chat-embed' ) . ' ' . json_last_error_msg() 
+			__( 'Failed to encode request data for Anthropic.', 'simple-ai-chat-embed' ) . ' ' . json_last_error_msg() 
 		);
 	}
 
@@ -76,7 +76,7 @@ function simple_ai_chat_embed_call_anthropic( $api_key, $user_message, $initial_
 	if ( is_wp_error( $response ) ) {
 		return new WP_Error( 
 			'anthropic_request_failed', 
-			__( 'Failed to connect to Anthropic API:', 'easy-ai-chat-embed' ) . ' ' . $response->get_error_message() 
+			__( 'Failed to connect to Anthropic API:', 'simple-ai-chat-embed' ) . ' ' . $response->get_error_message() 
 		);
 	}
 
@@ -86,11 +86,11 @@ function simple_ai_chat_embed_call_anthropic( $api_key, $user_message, $initial_
 
 	if ( $response_code !== 200 ) {
 		$error_type = isset( $result['error']['type'] ) ? $result['error']['type'] : 'unknown_error';
-		$error_message = isset( $result['error']['message'] ) ? $result['error']['message'] : __( 'Unknown error occurred.', 'easy-ai-chat-embed' );
+		$error_message = isset( $result['error']['message'] ) ? $result['error']['message'] : __( 'Unknown error occurred.', 'simple-ai-chat-embed' );
 		return new WP_Error(
 			'anthropic_api_error',
 			/* translators: 1: HTTP response code (e.g., 400), 2: Error type string (e.g., 'invalid_request_error'), 3: Error message from API. */
-			sprintf( __( 'Anthropic API Error (%1$d - %2$s): %3$s', 'easy-ai-chat-embed' ), $response_code, $error_type, $error_message ),
+			sprintf( __( 'Anthropic API Error (%1$d - %2$s): %3$s', 'simple-ai-chat-embed' ), $response_code, $error_type, $error_message ),
 			[ 'status' => $response_code ]
 		);
 	}
@@ -98,7 +98,7 @@ function simple_ai_chat_embed_call_anthropic( $api_key, $user_message, $initial_
 	if ( json_last_error() !== JSON_ERROR_NONE ) {
 		return new WP_Error( 
 			'anthropic_json_decode_error', 
-			__( 'Failed to decode Anthropic response.', 'easy-ai-chat-embed' ) . ' ' . json_last_error_msg() 
+			__( 'Failed to decode Anthropic response.', 'simple-ai-chat-embed' ) . ' ' . json_last_error_msg() 
 		);
 	}
 
@@ -108,7 +108,7 @@ function simple_ai_chat_embed_call_anthropic( $api_key, $user_message, $initial_
 	} else {
 		return new WP_Error( 
 			'anthropic_empty_response', 
-			__( 'Received an empty or unexpected response from Anthropic.', 'easy-ai-chat-embed' ) 
+			__( 'Received an empty or unexpected response from Anthropic.', 'simple-ai-chat-embed' ) 
 		);
 	}
 } 

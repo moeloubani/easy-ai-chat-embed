@@ -2,11 +2,13 @@
 /**
  * Handles AJAX requests for the Simple AI Chat Embed plugin.
  *
- * @package Easy_AI_Chat_Embed
+ * @package Simple_AI_Chat_Embed
  * @since 1.0.0
  */
 
 // Exit if accessed directly.
+use JetBrains\PhpStorm\NoReturn;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -49,7 +51,7 @@ function simple_ai_chat_embed_ajax_send_message() {
 
 	if (!$is_valid_model && !empty($selected_model)) {
 		wp_send_json_error(
-			[ 'message' => __( 'Invalid model format specified.', 'easy-ai-chat-embed' ) ],
+			[ 'message' => __( 'Invalid model format specified.', 'simple-ai-chat-embed' ) ],
 			400
 		);
 	}
@@ -86,7 +88,7 @@ function simple_ai_chat_embed_ajax_send_message() {
 
 	if ( empty( $user_message ) || empty( $selected_model ) || empty( $instance_id ) ) {
 		wp_send_json_error( 
-			[ 'message' => __( 'Missing required data (message, model, or instance ID).', 'easy-ai-chat-embed' ) ], 
+			[ 'message' => __( 'Missing required data (message, model, or instance ID).', 'simple-ai-chat-embed' ) ], 
 			400 
 		);
 	}
@@ -107,7 +109,7 @@ function simple_ai_chat_embed_ajax_send_message() {
 			[ 
 				'message' => sprintf(
 					/* translators: %s: The name of the selected AI model. */
-					__( 'API key for the selected model (%s) is missing or not configured in settings.', 'easy-ai-chat-embed' ),
+					__( 'API key for the selected model (%s) is missing or not configured in settings.', 'simple-ai-chat-embed' ),
 					esc_html( $selected_model )
 				) 
 			], 
@@ -131,7 +133,7 @@ function simple_ai_chat_embed_ajax_send_message() {
 				'invalid_model', 
 				sprintf(
 					/* translators: %s: The name of the selected AI model. */
-					__( 'Unsupported AI model selected: %s', 'easy-ai-chat-embed' ), 
+					__( 'Unsupported AI model selected: %s', 'simple-ai-chat-embed' ), 
 					esc_html( $selected_model )
 				)
 			);
@@ -142,7 +144,7 @@ function simple_ai_chat_embed_ajax_send_message() {
 			$error = $ai_response;
 		} elseif ( empty( $ai_response ) && ! $error ) {
 			// If no error but response is empty
-			$error = new WP_Error( 'empty_response', __( 'AI service returned an empty response.', 'easy-ai-chat-embed' ) );
+			$error = new WP_Error( 'empty_response', __( 'AI service returned an empty response.', 'simple-ai-chat-embed' ) );
 		}
 
 		// Handle errors
@@ -155,7 +157,7 @@ function simple_ai_chat_embed_ajax_send_message() {
 
 	} catch ( Exception $e ) {
 		wp_send_json_error( 
-			[ 'message' => __( 'Error contacting AI service:', 'easy-ai-chat-embed' ) . ' ' . $e->getMessage() ], 
+			[ 'message' => __( 'Error contacting AI service:', 'simple-ai-chat-embed' ) . ' ' . $e->getMessage() ], 
 			500 
 		);
 	}
@@ -168,3 +170,39 @@ function simple_ai_chat_embed_ajax_send_message() {
 add_action( 'wp_ajax_simple_ai_chat_embed_send_message', 'simple_ai_chat_embed_ajax_send_message' );
 // Also enable for non-logged-in users (front-end visitors)
 add_action( 'wp_ajax_nopriv_simple_ai_chat_embed_send_message', 'simple_ai_chat_embed_ajax_send_message' );
+
+// Endpoint to get the output for the chat embed block
+add_action( 'rest_api_init', function () {
+    register_rest_route( 'simple-ai-chat-embed/v1', '/fetch-output', array(
+        'methods'  => 'POST',
+        'callback' => 'simple_ai_chat_embed_get_chat_embed_html',
+        'permission_callback' => 'simple_ai_chat_embed_rest_permission_callback'
+    ) );
+} );
+
+/**
+ * Callback function for the REST API endpoint.
+ *
+ * @param WP_REST_Request $request The request object.
+ * @return void|null
+ */
+function simple_ai_chat_embed_get_chat_embed_html($request ) {
+    // Get the chatbot name from the request
+    $attributes = $request->get_param('attributes');
+
+    $chat_html_output = simple_ai_chat_embed_render_block( $attributes, '', null);
+    wp_send_json_success( $chat_html_output, 200 );
+    exit;
+}
+
+/**
+ * Checks if the current user has permission to access the REST API.
+ *
+ * This callback is used for the REST API endpoint at /simple-ai-chat-embed/v1/fetch-output.
+ *
+ * @since 1.0.0
+ * @return bool True if the user has permission, false otherwise.
+ */
+function simple_ai_chat_embed_rest_permission_callback() {
+    return current_user_can( 'publish_posts' );
+}

@@ -20,7 +20,7 @@ export default function save( { attributes } ) {
 	const { selectedModel, initialPrompt, instanceId } = attributes;
 
 	// Combine blockProps className with our specific instance class
-	const divClass = `${ blockProps.className ? blockProps.className + ' ' : '' }easy-ai-chat-embed-instance`;
+	const divClass = `${ blockProps.className ? blockProps.className + ' ' : '' }simple-ai-chat-embed-instance`;
 
 	// We render a simple div container. The actual chat interface
 	// will be mounted client-side by a separate script that finds this div.
@@ -35,7 +35,7 @@ export default function save( { attributes } ) {
 			{ /* Chat interface will load here */ }
       {/* Adding anoscript fallback or simple text might be good */}
       <noscript>
-        { __( 'Please enable JavaScript to use the AI Chat.', 'easy-ai-chat-embed' ) }
+        { __( 'Please enable JavaScript to use the AI Chat.', 'simple-ai-chat-embed' ) }
       </noscript>
 		</div>
 	);

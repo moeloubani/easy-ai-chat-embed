@@ -2,7 +2,7 @@
 /**
  * Elementor Widget Loader for Simple AI Chat Embed
  *
- * @package Easy_AI_Chat_Embed
+ * @package Simple_AI_Chat_Embed
  */
 
 // Exit if accessed directly.
@@ -18,14 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function simple_ai_chat_embed_register_elementor_widget( $widgets_manager ) {
 	// Include the widget class file.
-	$widget_file = SIMPLE_AI_CHAT_EMBED_PATH . 'includes/elementor/class-easy-ai-chat-embed-elementor-widget.php';
+	$widget_file = SIMPLE_AI_CHAT_EMBED_PATH . 'includes/elementor/class-simple-ai-chat-embed-elementor-widget.php';
 	
 	require_once $widget_file;
 
 	// Make sure the class exists before registering
-	if (class_exists('\Easy_AI_Chat_Embed\Includes\Elementor\Easy_AI_Chat_Embed_Elementor_Widget')) {
+	if (class_exists('\Simple_AI_Chat_Embed\Includes\Elementor\Simple_AI_Chat_Embed_Elementor_Widget')) {
 		// Create widget instance
-		$widget = new \Easy_AI_Chat_Embed\Includes\Elementor\Easy_AI_Chat_Embed_Elementor_Widget();
+		$widget = new \Simple_AI_Chat_Embed\Includes\Elementor\Simple_AI_Chat_Embed_Elementor_Widget();
 		
 		// Support both old and new Elementor versions
 		// Check which method to use for registering the widget
@@ -43,7 +43,7 @@ add_action( 'elementor/widgets/register', 'simple_ai_chat_embed_register_element
 // Legacy support for older Elementor versions
 add_action( 'elementor/widgets/widgets_registered', function( $widgets_manager ) {
 	// Only run if the widget isn't already registered
-	if (!$widgets_manager->get_widget_types('easy-ai-chat-embed')) {
+	if (!$widgets_manager->get_widget_types('simple-ai-chat-embed')) {
 		simple_ai_chat_embed_register_elementor_widget($widgets_manager);
 	}
 });

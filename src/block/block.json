@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "easy-ai-chat-embed/chat-embed",
-	"version": "0.1.0",
 	"title": "AI Chat Embed",
+	"name": "simple-ai-chat-embed/chat-embed",
+	"version": "0.1.0",
 	"category": "widgets",
 	"icon": "format-chat",
 	"description": "Embeds an AI-powered chat interface (ChatGPT, Claude, Gemini).",
@@ -28,8 +28,9 @@
 			"default": ""
 		}
 	},
-	"textdomain": "easy-ai-chat-embed",
+	"textdomain": "simple-ai-chat-embed",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./index.css"
+	"style": "file:./index.css",
+	"render": "file:./render.php"
 } 
