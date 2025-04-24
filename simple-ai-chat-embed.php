@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Simple AI Chat Embed
  * Description:       Embeds a chat interface powered by various AI models (ChatGPT, Claude, Gemini) via shortcode, block, or Elementor widget.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Moe Loubani
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define constants
-define( 'SIMPLE_AI_CHAT_EMBED_VERSION', '1.0.1' );
+define( 'SIMPLE_AI_CHAT_EMBED_VERSION', '1.0.2' );
 define( 'SIMPLE_AI_CHAT_EMBED_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SIMPLE_AI_CHAT_EMBED_URL', plugin_dir_url( __FILE__ ) );
 

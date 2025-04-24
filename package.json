@@ -1,6 +1,6 @@
 {
   "name": "simple-ai-chat-embed",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JS dependencies for Simple AI Chat Embed plugin.",
   "main": "build/index.js",
   "scripts": {
