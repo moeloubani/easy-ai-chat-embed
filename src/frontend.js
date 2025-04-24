@@ -18,6 +18,7 @@ import 'react-chatbot-kit/build/main.css';
 import configFn from './chatbot/config';
 import MessageParserClass from './chatbot/MessageParser';
 import ActionProvider from './chatbot/ActionProvider';
+import SimpleAIChat from './components/SimpleAIChat';
 import './frontend.scss'; // For custom frontend styles
 
 // Create global storage for chatbot instances
@@ -51,7 +52,7 @@ export const initializeChatEmbeds = () => {
 
 	console.log('chatContainers', chatContainers);
 
-	chatContainers.forEach( ( container ) => {
+	chatContainers.forEach((container) => {
 		// Get all instance-specific data directly from data attributes
 		const instanceId = container.dataset.instanceId;
 		const selectedModel = container.dataset.selectedModel;
@@ -59,14 +60,13 @@ export const initializeChatEmbeds = () => {
 		const chatbotName = container.dataset.chatbotName || 'AIChatBot'; // Default if somehow missing
 		const isBlock = container.dataset.isBlock === 'true';
 		const isShortcode = container.dataset.isShortcode === 'true';
-		const isElementor = container.dataset.isElementor === 'true';
 
 		// Use global data for ajaxUrl and nonce
 		const ajaxUrl = globalData.ajaxUrl;
 		const nonce = globalData.nonce;
 
 		// Basic validation (ensure we have necessary data)
-		if ( ! instanceId || ! selectedModel || !ajaxUrl || !nonce || !chatbotName ) {
+		if (!instanceId || !selectedModel || !ajaxUrl || !nonce || !chatbotName) {
 			// Keep critical error log
 			console.error('Simple AI Chat Embed: Missing required data for instance.');
 
@@ -96,56 +96,24 @@ export const initializeChatEmbeds = () => {
 		// This will be used for targeting the specific instance later
 		container.setAttribute('data-eace-current-instance', instanceId);
 
-		// Build state object with instance identifier
-		const initialState = {
-			messages: [],
-			instanceId: instanceId, // Include instance ID in the state
-			selectedModel: selectedModel,
-			initialPrompt: initialPrompt,
-			chatbotName: chatbotName,
+		// Render the React component into the container
+		const props = {
+			instanceId,
+			selectedModel,
+			initialPrompt,
+			chatbotName,
+			isBlock,
+			isShortcode
 		};
-
-		try {
-			// Get configuration with instance details, ajax info, initial state, and type flag
-			// Pass chatbotName instead of botName directly if config expects it
-			const botConfig = configFn(instanceId, initialPrompt, selectedModel, chatbotName, ajaxUrl, nonce, initialState, isBlock, isShortcode, isElementor);
-
-			// Setup chatbot props - pass CLASSES/constructors directly, not instances or factory functions
-			const chatbotProps = {
-				config: botConfig,
-				messageParser: MessageParserClass,
-				actionProvider: ActionProvider,
-			};
-
-			// Clear the noscript message / placeholder content
-			const noscriptElement = container.querySelector('noscript');
-			if (noscriptElement) {
-				noscriptElement.remove();
-			}
-			// Clear any other potential placeholder text
-			container.innerHTML = '';
-
-			// Create a wrapper div to target
-			const chatElement = wp.element.createElement(
-				'div',
-				{ className: 'simple-ai-chat-widget-container' }, // Outer wrapper for potential styling
-				wp.element.createElement(Chatbot, chatbotProps)
-			);
-
-			if ( useCreateRoot ) {
-				const root = createRoot( container );
-				root.render( chatElement );
-			} else {
-				render( chatElement, container );
-			}
-		} catch (error) {
-			// Keep critical error log
-			console.error('Error initializing chatbot:', error);
-			container.innerHTML = '<p>Error initializing chat interface. Please try again later.</p>';
+		if (useCreateRoot) {
+			const root = createRoot(container);
+			root.render(<SimpleAIChat {...props} />);
+		} else {
+			render(<SimpleAIChat {...props} />, container);
 		}
-	} );
+	});
 }
 
-domReady( () => {
+domReady(() => {
 	initializeChatEmbeds();
-} );
+});

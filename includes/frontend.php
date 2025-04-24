@@ -139,9 +139,20 @@ function simple_ai_chat_embed_enqueue_assets() {
             );
         }
 
+        // Get saved settings for defaults
+        $settings = get_option( 'simple_ai_chat_embed_settings', [] );
+        $default_model = isset( $settings['default_model'] ) ? $settings['default_model'] : '';
+        $default_prompt = isset( $settings['default_initial_prompt'] ) ? $settings['default_initial_prompt'] : '';
+        $default_chatbot_name = isset( $settings['default_chatbot_name'] ) ? $settings['default_chatbot_name'] : 'AIChatBot';
+
         $data_to_pass = array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce'   => wp_create_nonce('simple_ai_chat_embed_nonce'),
+            'defaults' => array(
+                'selectedModel' => $default_model,
+                'initialPrompt' => $default_prompt,
+                'chatbotName'   => $default_chatbot_name,
+            ),
         );
 
         // Localize script with common data

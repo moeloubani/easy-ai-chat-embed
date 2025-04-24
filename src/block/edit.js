@@ -6,13 +6,13 @@ import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, TextareaControl, TextControl } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 import { useEffect } from '@wordpress/element';
-import ChatbotWrapper from '../chatbot/ChatbotWrapper';
 
 /**
  * Internal dependencies
  */
 import './editor.scss';
 import {initializeChatEmbeds} from "../frontend"; // We might add editor-specific styles later
+import SimpleAIChat from '../components/SimpleAIChat';
 
 // Define the available models
 const modelOptions = [
@@ -48,12 +48,6 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		}
 	}, [ clientId, instanceId, setAttributes ] );
 
-	useEffect(() => {
-		wp.domReady(() => {
-			initializeChatEmbeds();
-		})
-	}, [attributes]);
-
 	return (
 		<div { ...blockProps }>
 			<InspectorControls>
@@ -84,16 +78,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<ChatbotWrapper
-				instanceId={attributes.instanceId}
-				initialPrompt={attributes.initialPrompt}
-				selectedModel={attributes.selectedModel}
-				chatbotName={attributes.chatbotName}
-				ajaxUrl=""
-				nonce=""
-				initialState={{}}
+			<SimpleAIChat
+				instanceId={instanceId}
+				selectedModel={selectedModel}
+				initialPrompt={initialPrompt}
+				chatbotName={chatbotName}
 				isBlock={true}
-				isEditor={true}
 			/>
 		</div>
 	);

@@ -96,9 +96,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _chatbot_ChatbotWrapper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../chatbot/ChatbotWrapper */ "./src/chatbot/ChatbotWrapper.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/block/editor.scss");
-/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../frontend */ "./src/frontend.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/block/editor.scss");
+/* harmony import */ var _frontend__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../frontend */ "./src/frontend.js");
+/* harmony import */ var _components_SimpleAIChat__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/SimpleAIChat */ "./src/components/SimpleAIChat.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
 /**
@@ -110,12 +110,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 /**
  * Internal dependencies
  */
 
  // We might add editor-specific styles later
+
 
 // Define the available models
 
@@ -169,11 +169,6 @@ function Edit({
       });
     }
   }, [clientId, instanceId, setAttributes]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
-    wp.domReady(() => {
-      (0,_frontend__WEBPACK_IMPORTED_MODULE_7__.initializeChatEmbeds)();
-    });
-  }, [attributes]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
     ...blockProps,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
@@ -202,16 +197,12 @@ function Edit({
           })
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_chatbot_ChatbotWrapper__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      instanceId: attributes.instanceId,
-      initialPrompt: attributes.initialPrompt,
-      selectedModel: attributes.selectedModel,
-      chatbotName: attributes.chatbotName,
-      ajaxUrl: "",
-      nonce: "",
-      initialState: {},
-      isBlock: true,
-      isEditor: true
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_SimpleAIChat__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      instanceId: instanceId,
+      selectedModel: selectedModel,
+      initialPrompt: initialPrompt,
+      chatbotName: chatbotName,
+      isBlock: true
     })]
   });
 }
@@ -583,76 +574,6 @@ const BotAvatar = () => {
 
 /***/ }),
 
-/***/ "./src/chatbot/ChatbotWrapper.js":
-/*!***************************************!*\
-  !*** ./src/chatbot/ChatbotWrapper.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_chatbot_kit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-chatbot-kit */ "./node_modules/react-chatbot-kit/build/index.js");
-/* harmony import */ var react_chatbot_kit__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_chatbot_kit__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config */ "./src/chatbot/config.js");
-/* harmony import */ var _MessageParser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MessageParser */ "./src/chatbot/MessageParser.js");
-/* harmony import */ var _ActionProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ActionProvider */ "./src/chatbot/ActionProvider.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
-
-
-
-
-
-
-const ChatbotWrapper = ({
-  instanceId,
-  initialPrompt,
-  selectedModel,
-  chatbotName = 'AIChatBot',
-  ajaxUrl,
-  nonce,
-  initialState = {},
-  isBlock = false,
-  isShortcode = false,
-  isElementor = false,
-  isEditor = false
-}) => {
-  const config = (0,_config__WEBPACK_IMPORTED_MODULE_2__["default"])(instanceId, initialPrompt, selectedModel, chatbotName, ajaxUrl, nonce, initialState, isBlock, isShortcode, isElementor);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-    className: "simple-ai-chat-embed-instance",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_chatbot_kit__WEBPACK_IMPORTED_MODULE_1__.Chatbot, {
-      config: config,
-      messageParser: _MessageParser__WEBPACK_IMPORTED_MODULE_3__["default"],
-      actionProvider: _ActionProvider__WEBPACK_IMPORTED_MODULE_4__["default"],
-      disableInput: isEditor
-    }), isEditor && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-      style: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(255,255,255,0.7)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        pointerEvents: 'none'
-      },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-        children: "Editor Preview"
-      })
-    })]
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChatbotWrapper);
-
-/***/ }),
-
 /***/ "./src/chatbot/MessageParser.js":
 /*!**************************************!*\
   !*** ./src/chatbot/MessageParser.js ***!
@@ -806,6 +727,90 @@ const configFn = (instanceId, initialPrompt, selectedModel, chatbotName, ajaxUrl
 
 /***/ }),
 
+/***/ "./src/components/SimpleAIChat.js":
+/*!****************************************!*\
+  !*** ./src/components/SimpleAIChat.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_chatbot_kit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-chatbot-kit */ "./node_modules/react-chatbot-kit/build/index.js");
+/* harmony import */ var react_chatbot_kit__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_chatbot_kit__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_chatbot_kit_build_main_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-chatbot-kit/build/main.css */ "./node_modules/react-chatbot-kit/build/main.css");
+/* harmony import */ var _chatbot_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../chatbot/config */ "./src/chatbot/config.js");
+/* harmony import */ var _chatbot_MessageParser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../chatbot/MessageParser */ "./src/chatbot/MessageParser.js");
+/* harmony import */ var _chatbot_ActionProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../chatbot/ActionProvider */ "./src/chatbot/ActionProvider.js");
+/* harmony import */ var _frontend_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../frontend.scss */ "./src/frontend.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+
+
+// Get global defaults from localized script
+
+const globalDefaults = window.simpleAiChatEmbedGlobalData && window.simpleAiChatEmbedGlobalData.defaults || {};
+
+/**
+ * SimpleAIChat React component for both frontend and editor usage.
+ * Props:
+ * - instanceId
+ * - selectedModel
+ * - initialPrompt
+ * - chatbotName
+ * - isBlock
+ * - isShortcode
+ */
+const SimpleAIChat = ({
+  instanceId,
+  selectedModel,
+  initialPrompt,
+  chatbotName,
+  isBlock = false,
+  isShortcode = false
+}) => {
+  // Fallback to global defaults if props are empty/undefined
+  const finalModel = selectedModel || globalDefaults.selectedModel;
+  const finalPrompt = initialPrompt || globalDefaults.initialPrompt;
+  const finalName = chatbotName || globalDefaults.chatbotName || 'AIChatBot';
+  console.log(selectedModel, initialPrompt, chatbotName, isBlock, isShortcode);
+  console.log(globalDefaults);
+  if (!finalModel) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      className: "simple-ai-chat-embed-instance-error",
+      children: "Please select a model."
+    });
+  }
+  // Build config with props (use positional arguments as required by configFn)
+  const config = (0,_chatbot_config__WEBPACK_IMPORTED_MODULE_3__["default"])(instanceId, finalPrompt, finalModel, finalName, window.simpleAiChatEmbedGlobalData && window.simpleAiChatEmbedGlobalData.ajaxUrl || '', window.simpleAiChatEmbedGlobalData && window.simpleAiChatEmbedGlobalData.nonce || '', {},
+  // initialState, can be enhanced as needed
+  isBlock, isShortcode, false // isElementor, adjust if needed
+  );
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    className: "simple-ai-chat-embed-instance",
+    "data-instance-id": instanceId,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_chatbot_kit__WEBPACK_IMPORTED_MODULE_1__.Chatbot, {
+      config: config,
+      messageParser: _chatbot_MessageParser__WEBPACK_IMPORTED_MODULE_4__["default"],
+      actionProvider: _chatbot_ActionProvider__WEBPACK_IMPORTED_MODULE_5__["default"],
+      headerText: finalName
+    })
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SimpleAIChat);
+
+/***/ }),
+
 /***/ "./src/frontend.js":
 /*!*************************!*\
   !*** ./src/frontend.js ***!
@@ -823,7 +828,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chatbot_config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chatbot/config */ "./src/chatbot/config.js");
 /* harmony import */ var _chatbot_MessageParser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chatbot/MessageParser */ "./src/chatbot/MessageParser.js");
 /* harmony import */ var _chatbot_ActionProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chatbot/ActionProvider */ "./src/chatbot/ActionProvider.js");
-/* harmony import */ var _frontend_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./frontend.scss */ "./src/frontend.scss");
+/* harmony import */ var _components_SimpleAIChat__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/SimpleAIChat */ "./src/components/SimpleAIChat.js");
+/* harmony import */ var _frontend_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./frontend.scss */ "./src/frontend.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
 /**
  * WordPress dependencies
  */
@@ -849,9 +857,11 @@ const {
 
 
 
+
  // For custom frontend styles
 
 // Create global storage for chatbot instances
+
 window.simpleAiChatInstances = window.simpleAiChatInstances || {};
 
 /**
@@ -887,7 +897,6 @@ const initializeChatEmbeds = () => {
     const chatbotName = container.dataset.chatbotName || 'AIChatBot'; // Default if somehow missing
     const isBlock = container.dataset.isBlock === 'true';
     const isShortcode = container.dataset.isShortcode === 'true';
-    const isElementor = container.dataset.isElementor === 'true';
 
     // Use global data for ajaxUrl and nonce
     const ajaxUrl = globalData.ajaxUrl;
@@ -930,51 +939,24 @@ const initializeChatEmbeds = () => {
     // This will be used for targeting the specific instance later
     container.setAttribute('data-eace-current-instance', instanceId);
 
-    // Build state object with instance identifier
-    const initialState = {
-      messages: [],
-      instanceId: instanceId,
-      // Include instance ID in the state
-      selectedModel: selectedModel,
-      initialPrompt: initialPrompt,
-      chatbotName: chatbotName
+    // Render the React component into the container
+    const props = {
+      instanceId,
+      selectedModel,
+      initialPrompt,
+      chatbotName,
+      isBlock,
+      isShortcode
     };
-    try {
-      // Get configuration with instance details, ajax info, initial state, and type flag
-      // Pass chatbotName instead of botName directly if config expects it
-      const botConfig = (0,_chatbot_config__WEBPACK_IMPORTED_MODULE_2__["default"])(instanceId, initialPrompt, selectedModel, chatbotName, ajaxUrl, nonce, initialState, isBlock, isShortcode, isElementor);
-
-      // Setup chatbot props - pass CLASSES/constructors directly, not instances or factory functions
-      const chatbotProps = {
-        config: botConfig,
-        messageParser: _chatbot_MessageParser__WEBPACK_IMPORTED_MODULE_3__["default"],
-        actionProvider: _chatbot_ActionProvider__WEBPACK_IMPORTED_MODULE_4__["default"]
-      };
-
-      // Clear the noscript message / placeholder content
-      const noscriptElement = container.querySelector('noscript');
-      if (noscriptElement) {
-        noscriptElement.remove();
-      }
-      // Clear any other potential placeholder text
-      container.innerHTML = '';
-
-      // Create a wrapper div to target
-      const chatElement = wp.element.createElement('div', {
-        className: 'simple-ai-chat-widget-container'
-      },
-      // Outer wrapper for potential styling
-      wp.element.createElement(react_chatbot_kit__WEBPACK_IMPORTED_MODULE_0__.Chatbot, chatbotProps));
-      if (useCreateRoot) {
-        const root = createRoot(container);
-        root.render(chatElement);
-      } else {
-        render(chatElement, container);
-      }
-    } catch (error) {
-      // Keep critical error log
-      console.error('Error initializing chatbot:', error);
-      container.innerHTML = '<p>Error initializing chat interface. Please try again later.</p>';
+    if (useCreateRoot) {
+      const root = createRoot(container);
+      root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_SimpleAIChat__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        ...props
+      }));
+    } else {
+      render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_SimpleAIChat__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        ...props
+      }), container);
     }
   });
 };
